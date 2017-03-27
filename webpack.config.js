@@ -2,9 +2,9 @@ const path = require('path');
 
 module.exports = {
   context: __dirname,
-  entry: './frontend/memrizr.jsx',
+  entry: './src/js/index.js',
   output: {
-    path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
+    path: path.resolve(__dirname, 'build', 'js'),
     filename: 'bundle.js'
   },
   resolve: {
