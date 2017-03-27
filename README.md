@@ -27,7 +27,7 @@ The window of this app should be split into 3 sections:
  - Control panel
   + This will consist of a Play/Pause toggle button to control the flow of blocks being created and an "Emit Txn" button that the user could see get bundled into a block and then see their txn in the block when it is created on the chain.
 
-![blockchain-viz-mock](docs/App.svg)
+![blockchain mock](docs/App.png)
 
 ## Architecture and Technologies
 This will be a React/Redux frontend App. The below components will access the redux store to determine their layout, data and current actions.
