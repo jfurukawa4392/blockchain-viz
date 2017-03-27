@@ -14,9 +14,8 @@ For the sake of this illustration, the user must be aware of the following facet
 
 ## Functionality and MVP
 This visualization of the blockchain should allow users to
-- Emit a transaction from their node
 - Examine a selected block that exists in the chain
-- Click on elements to see more information about that component of the blockchain ecosystem
+- Play/Pause the blockchain animation lifecycle
 
 ## Wireframes
 The window of this app should be split into 3 sections:
