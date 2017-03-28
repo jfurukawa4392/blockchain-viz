@@ -1,8 +1,13 @@
 import React from 'react';
+import Blockchain from './blockchain';
 
 const App = (props) => (
   <content>
-    <h1>{props.hello}</h1>
+    <canvas
+      id="blockchain-outer">
+      <Blockchain
+        ctx="blockchain-outer"/>
+    </canvas>
   </content>
 );
 
