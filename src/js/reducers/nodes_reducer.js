@@ -3,26 +3,26 @@ import {
 } from '../actions/node_actions';
 import merge from 'lodash/merge';
 
-const randCoord = (range) => (
-  Math.floor(Math.random()*range)
+const randCoord = (maximum, minimum) => (
+  Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
 );
 
 const _nodes = {
   readOnly: [
-    { id: 1, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 2, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 3, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 4, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 5, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 6, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 7, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 8, x: randCoord(400), y: randCoord(500), miner: false },
-    { id: 9, x: randCoord(400), y: randCoord(500), miner: false },
+    { id: 1, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 2, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 3, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 4, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 5, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 6, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 7, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 8, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
+    { id: 9, x: randCoord(400, 50), y: randCoord(400, 50), miner: false },
   ],
   miners: [
-    { id: 50, x: randCoord(400), y: randCoord(500), miner: true, minedBlocks: [] },
-    { id: 51, x: randCoord(400), y: randCoord(500), miner: true, minedBlocks: [] },
-    { id: 52, x: randCoord(400), y: randCoord(500), miner: true, minedBlocks: [] }
+    { id: 50, x: randCoord(400, 50), y: randCoord(400, 50), miner: true, minedBlocks: [] },
+    { id: 51, x: randCoord(400, 50), y: randCoord(400, 50), miner: true, minedBlocks: [] },
+    { id: 52, x: randCoord(400, 50), y: randCoord(400, 50), miner: true, minedBlocks: [] }
   ]
 };
 
