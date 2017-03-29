@@ -39,7 +39,14 @@ class ControlPanel extends React.Component{
   }
 
   emitTxn(){
-    this.props.receiveTransaction();
+    let { detail, userNode } = this.props;
+    let receiver = detail.id ? detail.id : userNode.id;
+
+    this.props.receiveTransaction({
+      to: receiver,
+      from: userNode.id,
+      amount: 10
+    });
   }
 
   render(){
@@ -66,7 +73,9 @@ class ControlPanel extends React.Component{
         <div
           className="detail-container">
           <Detail
-            detail={this.props.detail}/>
+            detail={this.props.detail}
+            receiveTxn={this.props.receiveTransaction}
+            userNode={this.props.userNode}/>
         </div>
       </aside>
     );
@@ -78,6 +87,7 @@ const mapStateToProps = state => {
     unverifiedTxns: state.unverifiedTxns,
     blocks: state.blocks,
     detail: state.detail,
+    userNode: state.userNode
   });
 };
 
@@ -85,7 +95,7 @@ const mapDispatchToProps = dispatch => {
   return({
     receiveTransaction: txn => dispatch(receiveTransaction(txn)),
     mineBlock: txns => dispatch(mineBlock(txns)),
-    clearTransactions: () => dispatch(clearTransactions())
+    clearTransactions: () => dispatch(clearTransactions()),
   });
 };
 

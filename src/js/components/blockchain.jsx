@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { mineBlock, receiveBlock } from '../actions/chain_actions';
-import { Layer, Line, Text, Rect, Stage, Group } from 'react-konva';
+import { Layer, Line, Text, Arrow, Rect, Stage, Group } from 'react-konva';
 
 class Blockchain extends React.Component {
   constructor(props){
@@ -23,8 +23,8 @@ class Blockchain extends React.Component {
     }
   }
 
-  handleClick(){
-    console.log("clicked");
+  handleClick(idx){
+    this.props.receiveBlock(this.props.blocks[idx]);
   }
 
   render(){
@@ -36,19 +36,32 @@ class Blockchain extends React.Component {
       // ctx = document.getElementById(ctx).getContext("2d");
 
       let [ x, y ] = [ 75, -75 ];
-      let blockGroup;
+      let blockGroup, arrow;
       chain = blocks.map((block, idx) => {
+        arrow = null;
         y += 100;
+        if(idx!==0){
+          arrow = (
+            <Arrow
+              x={x}
+              y={y}
+              points={[x, y, x, y-100]}
+              pointerLength={10}
+              pointerWidth={10}
+              fill="black"
+              stroke="black"/>
+          );
+        }
         blockGroup =
               <Group
-                key={idx}>
+                key={idx}
+                onClick={() => this.handleClick(idx)}>
                 <Rect
                   x={x}
                   y={y}
                   fill="#00D2FF"
                   width={150}
                   height={75}
-                  onClick={this.handleClick}
                   cornerRadius={10}/>
                 <Text
                   x={x}
@@ -56,6 +69,7 @@ class Blockchain extends React.Component {
                   width={150}
                   text={`${idx}`}
                   align="center"/>
+                {arrow}
               </Group>;
         return (blockGroup);
       });

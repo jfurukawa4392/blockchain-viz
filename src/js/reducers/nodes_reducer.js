@@ -30,12 +30,11 @@ const NodesReducer = (state = _nodes, action) => {
   let newState;
   switch(action.type){
     case(RECEIVE_NODE):
-      let { readOnly, miners } = state;
       newState = merge({}, state);
       if(action.node.miner){
         let tgtNode = newState.miners.filter((node) => node.id === action.node.id)[0];
         tgtNode.minedBlocks = action.node.minedBlocks;
-        newState = newState.miners.map((node) => {
+        newState.miners = newState.miners.map((node) => {
           if(node.id === tgtNode.id){
             return tgtNode;
           } else {
