@@ -66,15 +66,6 @@ class Nodes extends React.Component{
   }
 }
 
-// var circle = new Konva.Circle({
-//       x: stage.getWidth() / 2,
-//       y: stage.getHeight() / 2,
-//       radius: 70,
-//       fill: 'red',
-//       stroke: 'black',
-//       strokeWidth: 4
-//     });
-
 const mapStateToProps = (state) => ({
   nodes: state.nodes
 });

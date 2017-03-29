@@ -4,6 +4,7 @@ import { receiveTransaction } from '../actions/node_actions';
 import { mineBlock } from '../actions/chain_actions';
 import { Line } from 'rc-progress';
 import { connect } from 'react-redux';
+import Detail from './detail';
 
 class ControlPanel extends React.Component{
   constructor(props){
@@ -46,19 +47,27 @@ class ControlPanel extends React.Component{
     return(
       <aside
         className="control-outer">
-        Mining Level:
-        <Line
-          percent={`${this.state.mineProgress}`}
-          strokeWidth="4"
-          strokeColor="#aa0080" />
-        <button
-          onClick={() => this.handleMineClick()}>
-          Mine!
-        </button>
-        <button
-          onClick={() => this.emitTxn()}>
-          Emit Transaction
-        </button>
+        <div
+          className="control-inner">
+          Mining Level:
+          <Line
+            percent={`${this.state.mineProgress}`}
+            strokeWidth="4"
+            strokeColor="#aa0080"/>
+          <button
+            onClick={() => this.handleMineClick()}>
+            Mine!
+          </button>
+          <button
+            onClick={() => this.emitTxn()}>
+            Emit Transaction
+          </button>
+        </div>
+        <div
+          className="detail-container">
+          <Detail
+            detail={this.props.detail}/>
+        </div>
       </aside>
     );
   }
@@ -67,7 +76,8 @@ class ControlPanel extends React.Component{
 const mapStateToProps = state => {
   return({
     unverifiedTxns: state.unverifiedTxns,
-    blocks: state.blocks
+    blocks: state.blocks,
+    detail: state.detail,
   });
 };
 
