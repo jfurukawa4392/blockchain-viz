@@ -15,10 +15,16 @@ const _genesisBlock = {
 
 const BlocksReducer = (state = [ _genesisBlock ], action) => {
   let newState;
+  Object.freeze(state);
   switch (action.type){
     case(MINE_BLOCK):
       newState = state.map(block => Object.assign({}, block));
-      newState.push(action.block);
+      let block = {
+        txns: action.txns,
+        hash: makeHash(),
+        prevHash: newState[newState.length-1].hash
+      };
+      newState.push(block);
       return newState;
     default:
       return state;
