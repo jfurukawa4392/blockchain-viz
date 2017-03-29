@@ -28,7 +28,7 @@ const _nodes = {
 
 const NodesReducer = (state = _nodes, action) => {
   let newState;
-  switch (action.type){
+  switch(action.type){
     case(RECEIVE_NODE):
       let { readOnly, miners } = state;
       newState = merge({}, state);

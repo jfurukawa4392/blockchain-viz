@@ -12376,12 +12376,7 @@ var App = function (_React$Component) {
             _react2.default.createElement(_nodes2.default, null)
           )
         ),
-        _react2.default.createElement(
-          'content',
-          {
-            className: 'bottom-window' },
-          _react2.default.createElement(_control_panel2.default, null)
-        )
+        _react2.default.createElement(_control_panel2.default, null)
       );
     }
   }]);
@@ -12555,6 +12550,10 @@ var _rcProgress = __webpack_require__(234);
 
 var _reactRedux = __webpack_require__(44);
 
+var _detail = __webpack_require__(335);
+
+var _detail2 = _interopRequireDefault(_detail);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12616,26 +12615,38 @@ var ControlPanel = function (_React$Component) {
         'aside',
         {
           className: 'control-outer' },
-        'Mining Level:',
-        _react2.default.createElement(_rcProgress.Line, {
-          percent: '' + this.state.mineProgress,
-          strokeWidth: '4',
-          strokeColor: '#aa0080' }),
         _react2.default.createElement(
-          'button',
+          'div',
           {
-            onClick: function onClick() {
-              return _this2.handleMineClick();
-            } },
-          'Mine!'
+            className: 'control-inner' },
+          'Mining Level:',
+          _react2.default.createElement(_rcProgress.Line, {
+            percent: '' + this.state.mineProgress,
+            strokeWidth: '4',
+            strokeColor: '#aa0080' }),
+          _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick() {
+                return _this2.handleMineClick();
+              } },
+            'Mine!'
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick() {
+                return _this2.emitTxn();
+              } },
+            'Emit Transaction'
+          )
         ),
         _react2.default.createElement(
-          'button',
+          'div',
           {
-            onClick: function onClick() {
-              return _this2.emitTxn();
-            } },
-          'Emit Transaction'
+            className: 'detail-container' },
+          _react2.default.createElement(_detail2.default, {
+            detail: this.props.detail })
         )
       );
     }
@@ -12647,7 +12658,8 @@ var ControlPanel = function (_React$Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     unverifiedTxns: state.unverifiedTxns,
-    blocks: state.blocks
+    blocks: state.blocks,
+    detail: state.detail
   };
 };
 
@@ -12776,15 +12788,6 @@ var Nodes = function (_React$Component) {
 
   return Nodes;
 }(_react2.default.Component);
-
-// var circle = new Konva.Circle({
-//       x: stage.getWidth() / 2,
-//       y: stage.getHeight() / 2,
-//       radius: 70,
-//       fill: 'red',
-//       stroke: 'black',
-//       strokeWidth: 4
-//     });
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -12981,12 +12984,17 @@ var _transactions_reducer = __webpack_require__(140);
 
 var _transactions_reducer2 = _interopRequireDefault(_transactions_reducer);
 
+var _detail_reducer = __webpack_require__(334);
+
+var _detail_reducer2 = _interopRequireDefault(_detail_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RootReducer = (0, _redux.combineReducers)({
   blocks: _blocks_reducer2.default,
   nodes: _nodes_reducer2.default,
-  unverifiedTxns: _transactions_reducer2.default
+  unverifiedTxns: _transactions_reducer2.default,
+  detail: _detail_reducer2.default
 });
 
 exports.default = RootReducer;
@@ -46469,6 +46477,78 @@ function symbolObservablePonyfill(root) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _chain_actions = __webpack_require__(30);
+
+var _node_actions = __webpack_require__(31);
+
+var _nullDetail = {};
+
+var DetailReducer = function DetailReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullDetail;
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _node_actions.RECEIVE_NODE:
+      return action.node;
+    case _chain_actions.RECEIVE_BLOCK:
+      return action.block;
+    default:
+      return state;
+  }
+};
+
+exports.default = DetailReducer;
+
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Detail = function Detail(props) {
+  var detail = props.detail;
+
+  var description = void 0;
+
+  if (detail.hash) {
+    //block
+  } else {
+      //node
+    }
+
+  return _react2.default.createElement(
+    'section',
+    {
+      className: 'detail-inner' },
+    detail ? '<pre>' + JSON.stringify(detail) + '</pre>' : null
+  );
+};
+
+exports.default = Detail;
 
 /***/ })
 /******/ ]);
