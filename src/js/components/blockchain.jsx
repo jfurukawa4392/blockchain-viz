@@ -51,7 +51,6 @@ class Blockchain extends React.Component {
                   onClick={this.handleClick}
                   cornerRadius={10}/>
                 <Text
-                  key={idx}
                   x={x}
                   y={y+32}
                   width={150}
@@ -62,7 +61,10 @@ class Blockchain extends React.Component {
       });
     }
     return(
-      <Stage className="stage" width={300} height={blocks ? blocks.length*100 + 50 : 150}>
+      <Stage
+        className="blockchain-stage"
+        width={300}
+        height={blocks ? blocks.length*100 + 50 : 150}>
         <Layer>
           {this.state.loading ? null : chain}
         </Layer>
