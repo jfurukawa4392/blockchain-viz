@@ -1,4 +1,5 @@
 import React from 'react';
+import { clearTransactions } from '../actions/transactions_actions';
 import { receiveTransaction } from '../actions/node_actions';
 import { mineBlock } from '../actions/chain_actions';
 import { Line } from 'rc-progress';
@@ -17,14 +18,15 @@ class ControlPanel extends React.Component{
   }
 
   handleMineClick(){
-    let increment = 20;
+    let increment = 50;
     let newProgress;
     let { blocks } = this.props;
     if(blocks) increment = Math.floor(increment / blocks.length);
 
     newProgress = this.state.mineProgress + increment;
     if(newProgress >= 100){
-
+      this.props.mineBlock(this.props.unverifiedTxns);
+      this.props.clearTransactions();
       this.setState({
         mineProgress: 0
       });
@@ -72,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return({
     receiveTransaction: txn => dispatch(receiveTransaction(txn)),
-    mineBlock: block => dispatch(mineBlock(block))
+    mineBlock: txns => dispatch(mineBlock(txns)),
+    clearTransactions: () => dispatch(clearTransactions())
   });
 };
 

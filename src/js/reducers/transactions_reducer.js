@@ -1,6 +1,9 @@
 import {
-  RECEIVE_TRANSACTION
+  RECEIVE_TRANSACTION,
 } from '../actions/node_actions';
+import {
+  CLEAR_TRANSACTIONS
+} from '../actions/transactions_actions';
 import merge from 'lodash/merge';
 
 const TransactionsReducer = (state = [], action) => {
@@ -10,6 +13,8 @@ const TransactionsReducer = (state = [], action) => {
       newState = state.map(txn => Object.assign({}, txn));
       newState.push(action.txn);
       return newState;
+    case(CLEAR_TRANSACTIONS):
+      return [];
     default:
       return state;
   }

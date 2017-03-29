@@ -28,16 +28,27 @@ class Nodes extends React.Component{
       let color;
       nodes = nodes.map((node, idx) => {
         color = 'green';
-        if(node.miner) color = "blue";
+        if(node.miner) color = 'blue';
+        let [ x, y ] = [ node.x, node.y ];
         return(
-          <Circle
-            key={idx}
-            id={node.id}
-            x={node.x}
-            y={node.y}
-            radius={10}
-            fill={color}
-            stroke={color}/>
+          <Group
+            key={idx}>
+            <Circle
+              id={node.id}
+              x={x}
+              y={y}
+              radius={15}
+              fill={color}
+              stroke={color}/>
+            <Text
+              x={x-8}
+              y={y-3}
+              width={15}
+              fontSize={8}
+              text={`${idx}`}
+              fill={'black'}
+              align="center"/>
+          </Group>
         );
       });
     }

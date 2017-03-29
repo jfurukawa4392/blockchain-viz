@@ -23,7 +23,11 @@ class App extends React.Component{
             <Nodes/>
           </div>
         </main>
-        <ControlPanel />
+        <content
+          className="bottom-window">
+          <ControlPanel />
+
+        </content>
       </content>
     );
   }
