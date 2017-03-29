@@ -7,10 +7,3 @@
   display: flex;
   flex-direction: row;
 }
-
-.bottom-window{
-  width: 100%;
-  height: 150px;
-  display: flex;
-  flex-direction: row;
-}
