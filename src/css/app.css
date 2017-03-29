@@ -1,4 +1,9 @@
 .app-outer{
   display: flex;
+  flex-direction: column;
+}
+
+.diagram-container{
+  display: flex;
   flex-direction: row;
 }
