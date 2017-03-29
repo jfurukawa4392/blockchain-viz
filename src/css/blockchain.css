@@ -1,0 +1,9 @@
+.blockchain-outer{
+  height: 400px;
+  width: 350px;
+  overflow-y: scroll;
+}
+
+.konvajs-content{
+  height: 100%;
+}
