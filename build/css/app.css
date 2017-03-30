@@ -6,11 +6,12 @@ body {
   display: flex;
   flex-direction: column;
   width: 1080px;
-  margin-top: 75px;
+  margin-top: 50px;
   background-color: #EBF2FA;
   padding: 30px;
   box-sizing: border-box;
-  border-radius: 2px; }
+  border-radius: 2px;
+  text-align: center; }
 
 #root {
   display: flex;
@@ -44,23 +45,21 @@ body {
   align-items: center;
   flex-direction: column;
   width: 35%; }
+  .control-inner h3 {
+    -webkit-margin-before: 3px;
+    -webkit-margin-after: 3px; }
 
 .detail-inner {
   padding-top: 25px;
-  margin: 15px; }
+  margin: 15px;
+  text-align: left; }
 
 .rc-progress-circle {
-  width: 70%;
-  margin-top: 10px; }
+  width: 60%; }
 
 .buttons {
-  margin-top: 10px;
   display: flex;
   flex-direction: column; }
-
-.mine-progress-pct {
-  position: absolute;
-  bottom: 20%; }
 
 .nodes-outer {
   width: 65%; }

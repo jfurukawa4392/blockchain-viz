@@ -15,25 +15,23 @@
   align-items: center;
   flex-direction: column;
   width: 35%;
+  h3{
+    -webkit-margin-before: 3px;
+    -webkit-margin-after: 3px;
+  }
 }
 
 .detail-inner{
   padding-top: 25px;
   margin: 15px;
+  text-align: left;
 }
 
 .rc-progress-circle{
-  width: 70%;
-  margin-top: 10px;
+  width: 60%;
 }
 
 .buttons{
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-}
-
-.mine-progress-pct{
-  position:absolute;
-  bottom: 20%;
 }
