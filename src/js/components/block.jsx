@@ -6,7 +6,6 @@ const Block = (props) => {
 
   let arrow = null;
   if(idx > 0){
-
     arrow = (
       <Arrow
         points={[x+75, y, x+75, y-25]}
@@ -19,7 +18,7 @@ const Block = (props) => {
 
   return(
     <Group
-      onClick={() => this.handleClick(idx)}>
+      onClick={() => handleClick(idx)}>
       {arrow}
       <Rect
         x={x}
