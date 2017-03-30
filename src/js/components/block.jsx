@@ -2,7 +2,8 @@ import React from 'react';
 import { Line, Text, Arrow, Rect, Group } from 'react-konva';
 
 const Block = (props) => {
-  let { idx, handleClick, x, y } = props;
+  let { idx, handleClick, x, y, handleHover, handleMouseLeave } = props;
+  let text = idx;
 
   let arrow = null;
   if(idx > 0){
@@ -18,7 +19,9 @@ const Block = (props) => {
 
   return(
     <Group
-      onClick={() => handleClick(idx)}>
+      onClick={() => handleClick(idx)}
+      onMouseEnter={() => handleHover(idx)}
+      onMouseLeave={() => handleMouseLeave()}>
       {arrow}
       <Rect
         x={x}
@@ -31,7 +34,7 @@ const Block = (props) => {
         x={x}
         y={y+32}
         width={150}
-        text={`${idx}`}
+        text={`${text}`}
         align="center"
         stroke="#EBF2FA"/>
     </Group>

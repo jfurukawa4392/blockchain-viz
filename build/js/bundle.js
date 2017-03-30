@@ -12433,8 +12433,11 @@ var Block = function Block(props) {
   var idx = props.idx,
       handleClick = props.handleClick,
       x = props.x,
-      y = props.y;
+      y = props.y,
+      handleHover = props.handleHover,
+      handleMouseLeave = props.handleMouseLeave;
 
+  var text = idx;
 
   var arrow = null;
   if (idx > 0) {
@@ -12451,6 +12454,12 @@ var Block = function Block(props) {
     {
       onClick: function onClick() {
         return handleClick(idx);
+      },
+      onMouseEnter: function onMouseEnter() {
+        return handleHover(idx);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return handleMouseLeave();
       } },
     arrow,
     _react2.default.createElement(_reactKonva.Rect, {
@@ -12464,7 +12473,7 @@ var Block = function Block(props) {
       x: x,
       y: y + 32,
       width: 150,
-      text: '' + idx,
+      text: '' + text,
       align: 'center',
       stroke: '#EBF2FA' })
   );
@@ -12524,6 +12533,8 @@ var Blockchain = function (_React$Component) {
     };
 
     _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleHover = _this.handleHover.bind(_this);
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_this);
     return _this;
   }
 
@@ -12541,6 +12552,16 @@ var Blockchain = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick(idx) {
       this.props.receiveBlock(this.props.blocks[idx]);
+    }
+  }, {
+    key: 'handleHover',
+    value: function handleHover(idx) {
+      this.props.receiveBlock(this.props.blocks[idx]);
+    }
+  }, {
+    key: 'handleMouseLeave',
+    value: function handleMouseLeave() {
+      this.props.receiveBlock({});
     }
   }, {
     key: 'componentDidUpdate',
@@ -12568,6 +12589,8 @@ var Blockchain = function (_React$Component) {
           key: idx,
           idx: idx,
           handleClick: _this2.handleClick,
+          handleHover: _this2.handleHover,
+          handleMouseLeave: _this2.handleMouseLeave,
           x: x,
           y: y });
       });
@@ -13184,8 +13207,8 @@ var randCoord = function randCoord(maximum, minimum) {
 };
 
 var _nodes = {
-  readOnly: [{ id: 1, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 2, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 3, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 4, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 5, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 6, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 7, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 8, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }, { id: 9, x: randCoord(450, 50), y: randCoord(350, 50), miner: false }],
-  miners: [{ id: 50, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] }, { id: 51, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] }, { id: 52, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] }]
+  readOnly: [{ id: 1, x: 350, y: 75, miner: false }, { id: 2, x: 300, y: 100, miner: false }, { id: 3, x: 350, y: 125, miner: false }, { id: 4, x: 300, y: 150, miner: false }, { id: 5, x: 350, y: 175, miner: false }, { id: 6, x: 300, y: 200, miner: false }, { id: 7, x: 350, y: 225, miner: false }, { id: 8, x: 300, y: 250, miner: false }, { id: 9, x: 350, y: 275, miner: false }],
+  miners: [{ id: 50, x: 150, y: 125, miner: true, minedBlocks: [] }, { id: 51, x: 150, y: 175, miner: true, minedBlocks: [] }, { id: 52, x: 150, y: 225, miner: true, minedBlocks: [] }]
 };
 
 var NodesReducer = function NodesReducer() {

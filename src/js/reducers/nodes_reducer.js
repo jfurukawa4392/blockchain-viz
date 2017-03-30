@@ -9,20 +9,20 @@ const randCoord = (maximum, minimum) => (
 
 const _nodes = {
   readOnly: [
-    { id: 1, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 2, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 3, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 4, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 5, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 6, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 7, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 8, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
-    { id: 9, x: randCoord(450, 50), y: randCoord(350, 50), miner: false },
+    { id: 1, x: 350, y: 75, miner: false },
+    { id: 2, x: 300, y: 100, miner: false },
+    { id: 3, x: 350, y: 125, miner: false },
+    { id: 4, x: 300, y: 150, miner: false },
+    { id: 5, x: 350, y: 175, miner: false },
+    { id: 6, x: 300, y: 200, miner: false },
+    { id: 7, x: 350, y: 225, miner: false },
+    { id: 8, x: 300, y: 250, miner: false },
+    { id: 9, x: 350, y: 275, miner: false },
   ],
   miners: [
-    { id: 50, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] },
-    { id: 51, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] },
-    { id: 52, x: randCoord(450, 50), y: randCoord(350, 50), miner: true, minedBlocks: [] }
+    { id: 50, x: 150, y: 125, miner: true, minedBlocks: [] },
+    { id: 51, x: 150, y: 175, miner: true, minedBlocks: [] },
+    { id: 52, x: 150, y: 225, miner: true, minedBlocks: [] }
   ]
 };
 
