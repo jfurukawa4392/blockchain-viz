@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Blockchain from './blockchain';
 import Nodes from './nodes';
 import ControlPanel from './control_panel';

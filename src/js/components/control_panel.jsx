@@ -2,7 +2,7 @@ import React from 'react';
 import { clearTransactions } from '../actions/transactions_actions';
 import { receiveTransaction } from '../actions/node_actions';
 import { mineBlock } from '../actions/chain_actions';
-import { Line } from 'rc-progress';
+import { Line, Circle } from 'rc-progress';
 import { connect } from 'react-redux';
 import Detail from './detail';
 
@@ -56,19 +56,27 @@ class ControlPanel extends React.Component{
         className="control-outer">
         <div
           className="control-inner">
-          Mining Level:
-          <Line
+          <h1>Mining Level:</h1>
+          <Circle
+            className="mine-circle"
             percent={`${this.state.mineProgress}`}
             strokeWidth="4"
-            strokeColor="#aa0080"/>
-          <button
-            onClick={() => this.handleMineClick()}>
-            Mine!
-          </button>
-          <button
-            onClick={() => this.emitTxn()}>
-            Emit Transaction
-          </button>
+            strokeColor="#A5BE00"/>
+          <h3
+            className="mine-progress-pct">
+            {`${this.state.mineProgress}%`}
+          </h3>
+          <div
+            className="buttons">
+            <button
+              onClick={() => this.handleMineClick()}>
+              Mine!
+            </button>
+            <button
+              onClick={() => this.emitTxn()}>
+              Emit Transaction
+            </button>
+          </div>
         </div>
         <div
           className="detail-container">

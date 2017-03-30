@@ -37,25 +37,27 @@ class Nodes extends React.Component{
     if(userNode && nodes.miners){
       allNodes = nodes.readOnly.concat(nodes.miners);
 
-      let color, nodeShape, stroke;
+      let color, nodeShape, stroke, text;
 
       allNodes = allNodes.map((node, idx) => {
         let [ x, y ] = [ node.x, node.y ];
-        color = 'green';
-        stroke = 'green';
+        color = '#679436';
+        stroke = '#679436';
+        text = idx;
 
         if(node.miner){
           if(node.id === userNode.id){
-            color = 'blue';
-            stroke = 'gold';
+            color = '#427AA1';
+            stroke = '#679436';
+            text = 'YOU';
           }
           nodeShape = (
             <Star
               id={node.id}
               x={x}
               y={y}
-              numPoints={9}
-              innerRadius={12}
+              numPoints={20}
+              innerRadius={15}
               outerRadius={20}
               fill={color}
               stroke={stroke}/>
@@ -78,11 +80,11 @@ class Nodes extends React.Component{
             onClick={() => this.handleNodeClick(node.id)}>
             {nodeShape}
             <Text
-              x={x-8}
+              x={x-11}
               y={y-3}
-              width={15}
+              width={20}
               fontSize={8}
-              text={`${idx}`}
+              text={`${text}`}
               fill={'black'}
               align="center"/>
           </Group>
