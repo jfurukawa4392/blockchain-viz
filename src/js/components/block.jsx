@@ -63,7 +63,8 @@ class Block extends React.Component{
           width={150}
           text={text}
           align="center"
-          stroke="#EBF2FA"
+          stroke="black"
+          fontFamily="Sans-serif"
           strokeWidth={1}/>
       </Group>
     );

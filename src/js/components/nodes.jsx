@@ -5,6 +5,7 @@ import {
   receiveUserNode
 } from '../actions/node_actions';
 import Node from './node';
+import Lines from './lines';
 import { Layer, Line, Text, Circle, Star, Stage, Group } from 'react-konva';
 
 class Nodes extends React.Component{
@@ -27,17 +28,23 @@ class Nodes extends React.Component{
 
   render(){
     let { nodes, userNode } = this.props;
-    let allNodes;
+    let allNodes, allLines;
     if(userNode && nodes.miners){
       allNodes = nodes.readOnly.concat(nodes.miners);
 
       allNodes = allNodes.map((node, idx) => (
         <Node
           key={idx}
+          idx={idx}
           node={node}
           userNode={userNode}
-          handleNodeClick={this.handleNodeClick}
+          receiveNode={this.props.receiveNode}
           idx={idx}/>
+        )
+      );
+
+      allLines = allNodes.map((node, idx) => (
+          <Edges/>
         )
       );
     }
