@@ -1,0 +1,68 @@
+body {
+  background-color: #064789;
+  font-family: "Nunito Sans", sans-serif; }
+
+.app-outer {
+  display: flex;
+  flex-direction: column;
+  width: 1080px;
+  margin-top: 75px;
+  background-color: #EBF2FA;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 2px; }
+
+#root {
+  display: flex;
+  justify-content: center; }
+
+.diagram-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px; }
+
+.blockchain-outer {
+  height: 400px;
+  width: 35%;
+  overflow-y: scroll; }
+
+.konvajs-content {
+  height: 100%; }
+
+.control-outer {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 2px solid #EBF2FA; }
+
+.control-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 35%; }
+
+.detail-inner {
+  padding-top: 25px;
+  margin: 15px; }
+
+.rc-progress-circle {
+  width: 70%;
+  margin-top: 10px; }
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column; }
+
+.mine-progress-pct {
+  position: absolute;
+  bottom: 20%; }
+
+.nodes-outer {
+  width: 65%; }
+
+/*# sourceMappingURL=app.css.map */
