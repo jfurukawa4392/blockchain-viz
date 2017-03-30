@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { mineBlock, receiveBlock } from '../actions/chain_actions';
 import { Layer, Line, Text, Arrow, Rect, Stage, Group } from 'react-konva';
+import Block from './block';
 
 class Blockchain extends React.Component {
   constructor(props){
@@ -36,53 +37,24 @@ class Blockchain extends React.Component {
   }
 
   render(){
-    let chain = [];
-    let ctx;
     //get blocks from store and render them with arrows
+    let chain = [];
     let { blocks } = this.props;
+    let [ x, y ] = [ 75, -75 ];
 
-    if(!this.state.loading){
-      let [ x, y ] = [ 75, -75 ];
-      let blockGroup, arrow;
-      chain = blocks.map((block, idx) => {
-        arrow = null;
+    chain = blocks.map((block, idx) => {
         y += 100;
-        if(idx!==0){
-          arrow = (
-            <Arrow
-              x={x}
-              y={y}
-              points={[x, y, x, y-100]}
-              pointerLength={10}
-              pointerWidth={10}
-              fill="black"
-              stroke="black"/>
-          );
-        }
-        blockGroup =
-              <Group
-                key={idx}
-                id="heloooooo"
-                onClick={() => this.handleClick(idx)}>
-                <Rect
-                  x={x}
-                  y={y}
-                  fill="#427AA1"
-                  width={150}
-                  height={75}
-                  cornerRadius={10}/>
-                <Text
-                  x={x}
-                  y={y+32}
-                  width={150}
-                  text={`${idx}`}
-                  align="center"
-                  stroke="#EBF2FA"/>
-                {arrow}
-              </Group>;
-        return (blockGroup);
-      });
-    }
+        return(
+          <Block
+            key={idx}
+            idx={idx}
+            handleClick={this.handleClick}
+            x={x}
+            y={y}/>
+        );
+      }
+    );
+
     return(
       <Stage
         className="blockchain-stage"

@@ -13,6 +13,7 @@ class App extends React.Component{
     return(
       <content
         className="app-outer">
+        <h1>Blockchain Vizualizer</h1>
         <main
           className="diagram-container">
           <div
