@@ -10,12 +10,8 @@ class Blockchain extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleHover = this.handleHover.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   componentDidMount(){
@@ -25,18 +21,6 @@ class Blockchain extends React.Component {
         loading: false
       });
     }
-  }
-
-  handleClick(idx){
-    this.props.receiveBlock(this.props.blocks[idx]);
-  }
-
-  handleHover(idx){
-    this.props.receiveBlock(this.props.blocks[idx]);
-  }
-
-  handleMouseLeave(){
-    this.props.receiveBlock({});
   }
 
   componentDidUpdate(){
@@ -58,9 +42,8 @@ class Blockchain extends React.Component {
           <Block
             key={idx}
             idx={idx}
-            handleClick={this.handleClick}
-            handleHover={this.handleHover}
-            handleMouseLeave={this.handleMouseLeave}
+            receiveBlock={this.props.receiveBlock}
+            block={block}
             x={x}
             y={y}/>
         );

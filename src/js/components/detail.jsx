@@ -2,10 +2,32 @@ import React from 'react';
 
 const Detail = (props) => {
   let { detail, receiveTxn, userNode } = props;
-  let description, txnForm;
+  let description, txnForm, data;
+  let contentType = null;
 
   if(detail.hash){
     //block
+    contentType = "Block";
+    data = (
+      <ul
+        className="raw-data">
+        <li
+          key={1}>
+          Hash: {detail.hash}
+        </li>
+        <li
+          key={2}>
+          Parent Block: {detail.prevHash}
+        </li>
+        <li
+          key={3}>
+          Transactions:
+          <ul>
+            {detail.txns.map((txn, idx) => <li key={idx}>{`${txn.from} paid ${txn.amount} to ${txn.to}`}</li>)}
+          </ul>
+        </li>
+      </ul>
+    );
     description = (
       <content
         className="description">
@@ -18,6 +40,16 @@ const Detail = (props) => {
     );
   } else if(detail.id){
     //node
+    contentType = "Node";
+    data = (
+      <ul
+        className="raw-data">
+        <li
+          key={1}>
+          Address: {`${detail.id}`}
+        </li>
+      </ul>
+    );
     description = (
       <content
         className="description">
@@ -47,6 +79,19 @@ const Detail = (props) => {
       </form>
     );
   } else {
+    contentType = "Node";
+    data = (
+      <ul
+        className="raw-data">
+        <li
+          key={1}>
+          Address: {`${userNode.id}`}
+        </li>
+      </ul>
+    );
+    // JSON.stringify({
+    //           "Address": userNode.id
+    //         }, null, 2);
     description = (
       <content
         className="description">
@@ -67,10 +112,10 @@ const Detail = (props) => {
   return(
     <section
       className="detail-inner">
-      <div>
-        <pre>
-          { Object.keys(detail).length !== 0 ? JSON.stringify(detail, null, 2) : null }
-        </pre>
+      <div
+        className="data-container">
+        {`${contentType ? contentType + " Data" : ""}`}
+        { data }
       </div>
       {description}
     </section>

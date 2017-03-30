@@ -44,15 +44,38 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 35%; }
+  width: 25%; }
   .control-inner h3 {
     -webkit-margin-before: 3px;
     -webkit-margin-after: 3px; }
 
+.detail-container {
+  width: 75%;
+  display: flex;
+  justify-content: space-between; }
+
 .detail-inner {
-  padding-top: 25px;
-  margin: 15px;
-  text-align: left; }
+  padding-top: 15px;
+  margin: 15px 15px 15px 0;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 10px 0;
+  font-size: 16px; }
+  .data-container .raw-data {
+    display: flex;
+    flex-wrap: wrap; }
+
+.description {
+  width: 65%; }
 
 .rc-progress-circle {
   width: 60%; }
