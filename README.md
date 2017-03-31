@@ -26,6 +26,7 @@ For the sake of this illustration, the user must be aware of the following facet
 
 
 <p>Once the transaction is accepted, however, it isn't immediately reflected, it is simply broadcasted to other nodes as an unverified transaction until a miner bundles it into and mines a block on the chain. The user is currently the only node that has the option to mine or transact, but once the user clicks the "mine" button enough and creates a new block, those transaction effects are reflected in all nodes' account balances: </p>
+
 ![verify transaction](docs/screenshots/check_txn.gif)
 
 
