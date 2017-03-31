@@ -1,6 +1,6 @@
 import React from 'react';
 import { clearTransactions } from '../actions/transactions_actions';
-import { receiveTransaction } from '../actions/node_actions';
+import { receiveTransaction, receiveNode } from '../actions/node_actions';
 import { mineBlock } from '../actions/chain_actions';
 import { Line, Circle } from 'rc-progress';
 import { connect } from 'react-redux';
@@ -18,15 +18,26 @@ class ControlPanel extends React.Component{
     this.emitTxn = this.emitTxn.bind(this);
   }
 
+  componentWillUpdate(nextProps){
+    let { userNode, blocks } = this.props;
+    let newNode = userNode;
+
+    if(blocks.length < nextProps.blocks.length){
+      newNode.minedBlocks.push(blocks[blocks.length-1]);
+      this.props.receiveNode(newNode);
+    }
+  }
+
   handleMineClick(){
     let increment = 50;
-    let newProgress;
-    let { blocks } = this.props;
+    let newProgress, newBlock;
+    let { blocks, unverifiedTxns, userNode } = this.props;
     if(blocks) increment = Math.floor(increment / blocks.length);
 
     newProgress = this.state.mineProgress + increment;
     if(newProgress >= 100){
-      this.props.mineBlock(this.props.unverifiedTxns);
+      newBlock = { txns: unverifiedTxns, hash: makeHash() };
+      this.props.mineBlock(newBlock);
       this.props.clearTransactions();
       this.setState({
         mineProgress: 0
@@ -70,11 +81,7 @@ class ControlPanel extends React.Component{
             className="buttons">
             <button
               onClick={() => this.handleMineClick()}>
-              Mine!
-            </button>
-            <button
-              onClick={() => this.emitTxn()}>
-              Emit Transaction
+              Press Here to Mine!
             </button>
           </div>
         </div>
@@ -90,6 +97,10 @@ class ControlPanel extends React.Component{
   }
 }
 
+const makeHash = () => (
+  Math.random().toString(36).slice(12)
+);
+
 const mapStateToProps = state => {
   return({
     unverifiedTxns: state.unverifiedTxns,
@@ -104,6 +115,7 @@ const mapDispatchToProps = dispatch => {
     receiveTransaction: txn => dispatch(receiveTransaction(txn)),
     mineBlock: txns => dispatch(mineBlock(txns)),
     clearTransactions: () => dispatch(clearTransactions()),
+    receiveNode: node => dispatch(receiveNode(node)),
   });
 };
 

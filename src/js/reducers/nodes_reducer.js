@@ -46,12 +46,15 @@ const NodesReducer = (state = _nodes, action) => {
       return state;
     case(MINE_BLOCK):
       newState = state.map(node => Object.assign({}, node));
-      action.txns.forEach((txn) => {
+      action.block.txns.forEach((txn) => {
         if(txn.to !== txn.from){
-          let to = newState.filter((node) => node.id === to)[0];
-          let from = newState.filter((node) => node.id === from)[0];
-          to += txn.amount;
-          from -= txn.amount;
+          for (let i = 0; i < newState.length; i++) {
+            if(newState[i].id === txn.to){
+              newState[i].balance += txn.amount;
+            } else if(newState[i].id === txn.from){
+              newState[i].balance -= txn.amount;
+            }
+          }
         }
       });
       return newState;

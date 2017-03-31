@@ -20,8 +20,8 @@ const BlocksReducer = (state = [ _genesisBlock ], action) => {
     case(MINE_BLOCK):
       newState = state.map(block => Object.assign({}, block));
       let block = {
-        txns: action.txns,
-        hash: makeHash(),
+        txns: action.block.txns,
+        hash: action.block.hash,
         prevHash: newState[newState.length-1].hash
       };
       newState.push(block);

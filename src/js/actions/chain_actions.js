@@ -1,10 +1,10 @@
 export const MINE_BLOCK = 'MINE_BLOCK';
 export const RECEIVE_BLOCK = 'RECEIVE_BLOCK';
 
-export const mineBlock = (txns = []) => {
+export const mineBlock = (block) => {
   return {
     type: MINE_BLOCK,
-    txns
+    block
   };
 };
 
