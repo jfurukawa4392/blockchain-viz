@@ -8,27 +8,8 @@ const randCoord = (maximum, minimum) => (
 );
 
 const makeHash = () => (
-  Math.random().toString(36).slice(19)
+  Math.random().toString(36).slice(12)
 );
-
-// const _nodes = {
-//   readOnly: [
-//     { id: makeHash(), x: 400, y: 75, miner: false, balance: 50 },
-//     { id: makeHash(), x: 400, y: 125, miner: false, balance: 50 },
-//     { id: makeHash(), x: 400, y: 175, miner: false, balance: 50 },
-//     { id: makeHash(), x: 400, y: 225, miner: false, balance: 50 },
-//     { id: makeHash(), x: 400, y: 275, miner: false, balance: 50 },
-//     { id: makeHash(), x: 300, y: 100, miner: false, balance: 50 },
-//     { id: makeHash(), x: 300, y: 150, miner: false, balance: 50 },
-//     { id: makeHash(), x: 300, y: 200, miner: false, balance: 50 },
-//     { id: makeHash(), x: 300, y: 250, miner: false, balance: 50 },
-//   ],
-//   miners: [
-//     { id: makeHash(), x: 150, y: 125, miner: true, minedBlocks: [], balance: 50 },
-//     { id: makeHash(), x: 150, y: 175, miner: true, minedBlocks: [], balance: 50 },
-//     { id: makeHash(), x: 150, y: 225, miner: true, minedBlocks: [], balance: 50 }
-//   ]
-// };
 
 const _nodes = [
     { id: makeHash(), x: 400, y: 75, miner: false, balance: 50 },
@@ -53,7 +34,7 @@ const NodesReducer = (state = _nodes, action) => {
       if(action.node.miner){
         let tgtNode = newState.filter((node) => node.id === action.node.id)[0];
         tgtNode.minedBlocks = action.node.minedBlocks;
-        newState.miners = newState.miners.map((node) => {
+        newState = newState.map((node) => {
           if(node.id === tgtNode.id){
             return tgtNode;
           } else {
@@ -64,9 +45,14 @@ const NodesReducer = (state = _nodes, action) => {
       }
       return state;
     case(MINE_BLOCK):
-      newState = merge({}, state);
+      newState = state.map(node => Object.assign({}, node));
       action.txns.forEach((txn) => {
-        newState
+        if(txn.to !== txn.from){
+          let to = newState.filter((node) => node.id === to)[0];
+          let from = newState.filter((node) => node.id === from)[0];
+          to += txn.amount;
+          from -= txn.amount;
+        }
       });
       return newState;
     default:

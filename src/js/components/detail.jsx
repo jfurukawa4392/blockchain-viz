@@ -48,6 +48,10 @@ const Detail = (props) => {
           key={1}>
           Address: {`${detail.id}`}
         </li>
+        <li
+          key={2}>
+          Coins: {`${detail.balance}`}
+        </li>
       </ul>
     );
     description = (
@@ -87,6 +91,10 @@ const Detail = (props) => {
           key={1}>
           Address: {`${userNode.id}`}
         </li>
+        <li
+          key={2}>
+          Coins: {`${userNode.balance}`}
+        </li>
       </ul>
     );
     description = (
@@ -111,7 +119,7 @@ const Detail = (props) => {
       className="detail-inner">
       <div
         className="data-container">
-        {`${contentType ? contentType + " Data" : ""}`}
+        <h3>{`${contentType ? contentType + " Data" : ""}`}</h3>
         { data }
       </div>
       {description}

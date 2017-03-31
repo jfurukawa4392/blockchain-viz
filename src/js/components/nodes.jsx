@@ -17,38 +17,35 @@ class Nodes extends React.Component{
 
   componentDidMount(){
     let { nodes } = this.props;
-    this.props.receiveUserNode(nodes.miners[0]);
+    this.props.receiveUserNode(nodes[9]);
   }
 
   componentWillUpdate(nextProps){
     let { unverifiedTxns, nodes } = this.props;
     let newTxnsLength = nextProps.unverifiedTxns.length;
     if(unverifiedTxns.length < newTxnsLength){
-      let allNodes = nodes.miners.concat(nodes.readOnly);
       let { to, from } = nextProps.unverifiedTxns[newTxnsLength-1];
 
-      let transactors = allNodes.filter((node, idx) => {
+      let transactors = nodes.filter((node, idx) => {
         if(node.id === to || node.id === from){
             return idx;
         }
       });
-
     }
   }
 
   handleNodeClick(id){
-    let nodes = this.props.nodes.readOnly.concat(this.props.nodes.miners);
+    let { nodes } = this.props;
     let tgtNode = nodes.filter((node) => node.id === id)[0];
     this.props.receiveNode(tgtNode);
   }
 
   render(){
     let { nodes, userNode } = this.props;
-    let allNodes, backLines, nodeShapes, nodeShape, tween;
-    if(userNode && nodes.miners){
-      allNodes = nodes.readOnly.concat(nodes.miners);
+    let backLines, nodeShapes, nodeShape, tween;
+    if(userNode && nodes){
 
-      nodeShapes = allNodes.map((node, idx) => {
+      nodeShapes = nodes.map((node, idx) => {
         return (
           <Node
             key={idx}
@@ -61,20 +58,20 @@ class Nodes extends React.Component{
       }
       );
 
-      backLines = allNodes.map((node, idx) => {
+      backLines = nodes.map((node, idx) => {
           if(idx < 5){
             return(
               <Edges
                 key={idx}
                 node={node}
-                nodes={allNodes.slice(5,allNodes.length-nodes.miners.length+1)}/>
+                nodes={nodes.slice(5,9)}/>
             );
-          } else if(idx < nodes.readOnly.length){
+          } else if(idx < 9){
             return(
               <Edges
                 key={idx}
                 node={node}
-                nodes={nodes.miners}/>
+                nodes={nodes.slice(9)}/>
             );
           } else {
             return(
