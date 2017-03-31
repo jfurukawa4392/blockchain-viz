@@ -27,9 +27,6 @@ class Blockchain extends React.Component {
   componentDidUpdate(prevProps){
     if(prevProps.blocks.length < this.props.blocks.length){
       const chainEnd = ReactDOM.findDOMNode(this.refs.last);
-      console.log(this.last);
-      console.log(this.refs);
-      console.log(chainEnd);
       if(chainEnd){
         this.refs.last.scrollIntoView();
       }

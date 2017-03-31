@@ -17,6 +17,62 @@ For the sake of this illustration, the user must be aware of the following facet
 - Miners are participants that have the ability to group transactions together and add a new block of transactions to the end of the chain and reap a set reward of cryptocurrency for their work
 - When a new block is written, that event is propagated to all other participants in the chain so everyone has the same set of verified facts
 
+## Snippets
+<p>Below is a code snippet for the mining progress bar and transaction verification</p>
+``` javascript
+handleMineClick(){
+  let increment = 50;
+  let newProgress, newBlock;
+  let { blocks, unverifiedTxns, userNode } = this.props;
+  if(blocks) increment = Math.floor(increment / blocks.length);
+
+  newProgress = this.state.mineProgress + increment;
+  if(newProgress >= 100){
+    newBlock = {
+      txns: unverifiedTxns,
+      hash: makeHash(),
+      minedBy: userNode
+    };
+    this.props.mineBlock(newBlock);
+    this.props.clearTransactions();
+    this.setState({
+      mineProgress: 0
+    });
+  } else {
+    this.setState({
+      mineProgress: newProgress
+    });
+  }
+}
+```
+<p>This snippet handles the internal state of the mining progress bar and when it exceeds 100%, sends a mine block action to the reducers in the store. This adds a new block to the chain as well as rewards the miner with a $25 credit to their balance. It also processes all transactions that were included with the block as previously unverified transactions. </p>
+
+``` javascript
+let fromBalance = unverifiedTxns.reduce((acc, txn) => {
+  if(txn.from === userNode.id){
+    acc + txn.amount;
+  }
+}, 0);
+
+if(fromBalance + userNode.balance - this.state.amount < 0){
+  this.setState({
+    amount: 0,
+    errors: "Not enough coins! Try mining a block..."
+  });
+  return;
+}
+let receiver = detail.id ? detail.id : userNode.id;
+this.props.receiveTxn({
+  to: receiver,
+  from: userNode.id,
+  amount: parseInt(this.state.amount)
+});
+```
+
+<p>
+This is the view layer validation of any transaction that gets submitted by the user. It checks all verified transactions that have yet to be included in a mined block and checks to see if the user has enough funds to make the payment. It will yield an error if the account cannot make the payment and tells them to mine a block if they want more coins.
+</p>
+
 ## Demo
 ![make transaction](docs/screenshots/make_payment.gif)
 
