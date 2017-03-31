@@ -8,8 +8,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById('root');
   let store = configureStore();
 
-  window.state = store.getState;
-  window.mineBlock = mineBlock;
-
   ReactDOM.render(<Root store={store}/>, root);
 });

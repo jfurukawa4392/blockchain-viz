@@ -12892,9 +12892,6 @@ var Blockchain = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       if (prevProps.blocks.length < this.props.blocks.length) {
         var chainEnd = _reactDom2.default.findDOMNode(this.refs.last);
-        console.log(this.last);
-        console.log(this.refs);
-        console.log(chainEnd);
         if (chainEnd) {
           this.refs.last.scrollIntoView();
         }
@@ -13861,9 +13858,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   var store = (0, _store2.default)();
-
-  window.state = store.getState;
-  window.mineBlock = _chain_actions.mineBlock;
 
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
