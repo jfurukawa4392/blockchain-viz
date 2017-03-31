@@ -23,9 +23,13 @@ class Detail extends React.Component{
     e.preventDefault();
 
     let { detail, userNode, unverifiedTxns } = this.props;
-    let fromBalance = unverifiedTxns.reduce((acc, txn) => acc + txn.amount, 0);
+    let fromBalance = unverifiedTxns.reduce((acc, txn) => {
+      if(txn.from === userNode.id){
+        acc + txn.amount;
+      }
+    }, 0);
 
-    if(fromBalance - this.state.amount < 0){
+    if(fromBalance + userNode.balance - this.state.amount < 0){
       this.setState({
         amount: 0,
         errors: "Not enough coins! Try mining a block..."
@@ -170,11 +174,11 @@ class Detail extends React.Component{
           className="data-container">
           <h3>{`${contentType ? contentType + " Data" : ""}`}</h3>
           { data }
-          { txnForm }
           <span
             className="payment-errors">
             { this.state.errors }
           </span>
+          { txnForm }
         </div>
         {description}
       </section>

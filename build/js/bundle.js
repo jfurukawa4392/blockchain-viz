@@ -13023,7 +13023,6 @@ var ControlPanel = function (_React$Component) {
     };
 
     _this.handleMineClick = _this.handleMineClick.bind(_this);
-    _this.emitTxn = _this.emitTxn.bind(_this);
     return _this;
   }
 
@@ -13056,7 +13055,6 @@ var ControlPanel = function (_React$Component) {
 
       newProgress = this.state.mineProgress + increment;
       if (newProgress >= 100) {
-        console.log(userNode);
         newBlock = {
           txns: unverifiedTxns,
           hash: makeHash(),
@@ -13072,21 +13070,6 @@ var ControlPanel = function (_React$Component) {
           mineProgress: newProgress
         });
       }
-    }
-  }, {
-    key: 'emitTxn',
-    value: function emitTxn() {
-      var _props3 = this.props,
-          detail = _props3.detail,
-          userNode = _props3.userNode;
-
-      var receiver = detail.id ? detail.id : userNode.id;
-
-      this.props.receiveTransaction({
-        to: receiver,
-        from: userNode.id,
-        amount: 5
-      });
     }
   }, {
     key: 'render',
@@ -13244,10 +13227,12 @@ var Detail = function (_React$Component) {
           unverifiedTxns = _props.unverifiedTxns;
 
       var fromBalance = unverifiedTxns.reduce(function (acc, txn) {
-        return acc + txn.amount;
+        if (txn.from === userNode.id) {
+          acc + txn.amount;
+        }
       }, 0);
 
-      if (fromBalance - this.state.amount < 0) {
+      if (fromBalance + userNode.balance - this.state.amount < 0) {
         this.setState({
           amount: 0,
           errors: "Not enough coins! Try mining a block..."
@@ -13456,13 +13441,13 @@ var Detail = function (_React$Component) {
             '' + (contentType ? contentType + " Data" : "")
           ),
           data,
-          txnForm,
           _react2.default.createElement(
             'span',
             {
               className: 'payment-errors' },
             this.state.errors
-          )
+          ),
+          txnForm
         ),
         description
       );
@@ -14018,7 +14003,7 @@ var makeHash = function makeHash() {
   return Math.random().toString(36).slice(12);
 };
 
-var _nodes = [{ id: makeHash(), x: 400, y: 75, miner: false, balance: 50 }, { id: makeHash(), x: 400, y: 125, miner: false, balance: 50 }, { id: makeHash(), x: 400, y: 175, miner: false, balance: 50 }, { id: makeHash(), x: 400, y: 225, miner: false, balance: 50 }, { id: makeHash(), x: 400, y: 275, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 100, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 150, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 200, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 250, miner: false, balance: 50 }, { id: makeHash(), x: 150, y: 125, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 175, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 225, miner: true, minedBlocks: [], balance: 50 }];
+var _nodes = [{ id: makeHash(), x: 425, y: 95, miner: false, balance: 50 }, { id: makeHash(), x: 460, y: 125, miner: false, balance: 50 }, { id: makeHash(), x: 480, y: 175, miner: false, balance: 50 }, { id: makeHash(), x: 460, y: 225, miner: false, balance: 50 }, { id: makeHash(), x: 425, y: 250, miner: false, balance: 50 }, { id: makeHash(), x: 350, y: 100, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 150, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 200, miner: false, balance: 50 }, { id: makeHash(), x: 350, y: 250, miner: false, balance: 50 }, { id: makeHash(), x: 150, y: 125, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 175, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 225, miner: true, minedBlocks: [], balance: 50 }];
 
 var NodesReducer = function NodesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nodes;
