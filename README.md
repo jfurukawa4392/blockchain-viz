@@ -19,6 +19,7 @@ For the sake of this illustration, the user must be aware of the following facet
 
 ## Snippets
 <p>Below is a code snippet for the mining progress bar and transaction verification</p>
+
 ``` javascript
 handleMineClick(){
   let increment = 50;
@@ -45,7 +46,9 @@ handleMineClick(){
   }
 }
 ```
-<p>This snippet handles the internal state of the mining progress bar and when it exceeds 100%, sends a mine block action to the reducers in the store. This adds a new block to the chain as well as rewards the miner with a $25 credit to their balance. It also processes all transactions that were included with the block as previously unverified transactions. </p>
+
+This snippet handles the internal state of the mining progress bar and when it exceeds 100%, sends a mine block action to the reducers in the store. This adds a new block to the chain as well as rewards the miner with a $25 credit to their balance. It also processes all transactions that were included with the block as previously unverified transactions.
+
 
 ``` javascript
 let fromBalance = unverifiedTxns.reduce((acc, txn) => {
@@ -69,9 +72,8 @@ this.props.receiveTxn({
 });
 ```
 
-<p>
 This is the view layer validation of any transaction that gets submitted by the user. It checks all verified transactions that have yet to be included in a mined block and checks to see if the user has enough funds to make the payment. It will yield an error if the account cannot make the payment and tells them to mine a block if they want more coins.
-</p>
+
 
 ## Demo
 ![make transaction](docs/screenshots/make_payment.gif)
