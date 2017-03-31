@@ -89,7 +89,7 @@ body {
   height: 100%;
   padding: 10px 5px 10px 10px;
   font-size: 15px;
-  overflow: scroll; }
+  overflow-y: scroll; }
   .data-container h3 {
     margin: 0; }
   .data-container .payment-errors {

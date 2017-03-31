@@ -12788,7 +12788,6 @@ var Block = function (_React$Component) {
       return _react2.default.createElement(
         _reactKonva.Group,
         {
-          ref: groupRef,
           onClick: function onClick() {
             return _this2.handleClick(block);
           },
@@ -12891,12 +12890,15 @@ var Blockchain = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      // if(prevProps.blocks.length < this.props.blocks.length){
-      //   const chainEnd = ReactDOM.findDOMNode(this.chainEnd);
-      //   if(chainEnd){
-      //     chainEnd.scrollIntoView();
-      //   }
-      // }
+      if (prevProps.blocks.length < this.props.blocks.length) {
+        var chainEnd = _reactDom2.default.findDOMNode(this.refs.last);
+        console.log(this.last);
+        console.log(this.refs);
+        console.log(chainEnd);
+        if (chainEnd) {
+          this.refs.last.scrollIntoView();
+        }
+      }
     }
   }, {
     key: 'render',
@@ -12925,6 +12927,7 @@ var Blockchain = function (_React$Component) {
         } else {
           blockShape = _react2.default.createElement(_block2.default, {
             groupRef: 'last',
+            ref: 'last',
             key: idx,
             idx: idx,
             receiveBlock: _this2.props.receiveBlock,
@@ -13306,7 +13309,7 @@ var Detail = function (_React$Component) {
                 return _react2.default.createElement(
                   'li',
                   { key: idx },
-                  txn.from + ' paid ' + txn.amount + ' to ' + txn.to
+                  txn.from + ' paid $' + txn.amount + ' to ' + txn.to
                 );
               })
             )
@@ -13349,7 +13352,7 @@ var Detail = function (_React$Component) {
           'content',
           {
             className: 'description' },
-          'Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of addresses/accounts that can transact and send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants.',
+          'Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of anonymous addresses/accounts that can send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants.',
           _react2.default.createElement('br', null),
           _react2.default.createElement(
             'a',
@@ -13421,7 +13424,7 @@ var Detail = function (_React$Component) {
                 null,
                 'validated'
               ),
-              ' transactions that has occurred since the original block, known as the genesis block.'
+              ' transactions that have occurred since the original block, known as the genesis block.'
             )
           )
         );
@@ -13614,7 +13617,7 @@ var Node = function (_React$Component) {
 
       fill = this.state.fill;
       stroke = '#679436';
-      text = idx;
+      text = "";
 
       if (node.miner) {
         if (node.id === userNode.id) {
@@ -13733,27 +13736,6 @@ var Nodes = function (_React$Component) {
       this.props.receiveUserNode(nodes[9]);
     }
   }, {
-    key: 'componentWillUpdate',
-    value: function componentWillUpdate(nextProps) {
-      var _props = this.props,
-          unverifiedTxns = _props.unverifiedTxns,
-          nodes = _props.nodes;
-
-      var newTxnsLength = nextProps.unverifiedTxns.length;
-      if (unverifiedTxns.length < newTxnsLength) {
-        var _nextProps$unverified = nextProps.unverifiedTxns[newTxnsLength - 1],
-            to = _nextProps$unverified.to,
-            from = _nextProps$unverified.from;
-
-
-        var transactors = nodes.filter(function (node, idx) {
-          if (node.id === to || node.id === from) {
-            return idx;
-          }
-        });
-      }
-    }
-  }, {
     key: 'handleNodeClick',
     value: function handleNodeClick(id) {
       var nodes = this.props.nodes;
@@ -13768,14 +13750,14 @@ var Nodes = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var _props2 = this.props,
-          nodes = _props2.nodes,
-          userNode = _props2.userNode;
+      var _props = this.props,
+          nodes = _props.nodes,
+          userNode = _props.userNode;
 
       var backLines = void 0,
           nodeShapes = void 0,
           nodeShape = void 0,
-          tween = void 0;
+          layer = void 0;
       if (userNode && nodes) {
 
         nodeShapes = nodes.map(function (node, idx) {
@@ -13806,6 +13788,13 @@ var Nodes = function (_React$Component) {
               nodes: [{ x: 5, y: 175 }] });
           }
         });
+
+        layer = _react2.default.createElement(
+          _reactKonva.Layer,
+          null,
+          backLines,
+          nodeShapes
+        );
       }
       return _react2.default.createElement(
         _reactKonva.Stage,
@@ -13813,12 +13802,7 @@ var Nodes = function (_React$Component) {
           className: 'nodes-stage',
           width: 500,
           height: 400 },
-        _react2.default.createElement(
-          _reactKonva.Layer,
-          null,
-          backLines,
-          nodeShapes
-        )
+        layer
       );
     }
   }]);

@@ -25,12 +25,15 @@ class Blockchain extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    // if(prevProps.blocks.length < this.props.blocks.length){
-    //   const chainEnd = ReactDOM.findDOMNode(this.chainEnd);
-    //   if(chainEnd){
-    //     chainEnd.scrollIntoView();
-    //   }
-    // }
+    if(prevProps.blocks.length < this.props.blocks.length){
+      const chainEnd = ReactDOM.findDOMNode(this.refs.last);
+      console.log(this.last);
+      console.log(this.refs);
+      console.log(chainEnd);
+      if(chainEnd){
+        this.refs.last.scrollIntoView();
+      }
+    }
   }
 
   render(){
@@ -57,6 +60,7 @@ class Blockchain extends React.Component {
           blockShape = (
             <Block
               groupRef="last"
+              ref="last"
               key={idx}
               idx={idx}
               receiveBlock={this.props.receiveBlock}

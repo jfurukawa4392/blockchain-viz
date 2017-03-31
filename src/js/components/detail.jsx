@@ -78,7 +78,7 @@ class Detail extends React.Component{
             key={3}>
             Transactions:
             <ul>
-              {detail.txns.map((txn, idx) => <li key={idx}>{`${txn.from} paid ${txn.amount} to ${txn.to}`}</li>)}
+              {detail.txns.map((txn, idx) => <li key={idx}>{`${txn.from} paid $${txn.amount} to ${txn.to}`}</li>)}
             </ul>
           </li>
         </ul>
@@ -113,8 +113,8 @@ class Detail extends React.Component{
         <content
           className="description">
           Nodes are the the discrete computing units of a blockchain cluster.
-          In cryptocurrency terms they can be thought of addresses/accounts that
-          can transact and send data/currency amongst themselves. Nodes are
+          In cryptocurrency terms they can be thought of anonymous addresses/accounts that
+          can send data/currency amongst themselves. Nodes are
           classified either as miners or as read-only participants.<br />
           <a href="https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/">
            Learn more about their differences here.</a>
@@ -160,7 +160,7 @@ class Detail extends React.Component{
               Nodes: represented by the circles/stars to the right are the computing nodes which can send transactions within the cryptocurrency economy.
             </li>
             <li>
-              Blockchain: The chain itself can be thought of as a record of <span>validated</span> transactions that has occurred since the original block, known as the genesis block.
+              Blockchain: The chain itself can be thought of as a record of <span>validated</span> transactions that have occurred since the original block, known as the genesis block.
             </li>
           </ul>
         </content>

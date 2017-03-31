@@ -20,20 +20,6 @@ class Nodes extends React.Component{
     this.props.receiveUserNode(nodes[9]);
   }
 
-  componentWillUpdate(nextProps){
-    let { unverifiedTxns, nodes } = this.props;
-    let newTxnsLength = nextProps.unverifiedTxns.length;
-    if(unverifiedTxns.length < newTxnsLength){
-      let { to, from } = nextProps.unverifiedTxns[newTxnsLength-1];
-
-      let transactors = nodes.filter((node, idx) => {
-        if(node.id === to || node.id === from){
-            return idx;
-        }
-      });
-    }
-  }
-
   handleNodeClick(id){
     let { nodes } = this.props;
     let tgtNode = nodes.filter((node) => node.id === id)[0];
@@ -42,7 +28,7 @@ class Nodes extends React.Component{
 
   render(){
     let { nodes, userNode } = this.props;
-    let backLines, nodeShapes, nodeShape, tween;
+    let backLines, nodeShapes, nodeShape, layer;
     if(userNode && nodes){
 
       nodeShapes = nodes.map((node, idx) => {
@@ -83,16 +69,21 @@ class Nodes extends React.Component{
           }
         }
       );
+
+      layer = (
+        <Layer>
+          {backLines}
+          {nodeShapes}
+        </Layer>
+      );
+
     }
     return(
       <Stage
         className="nodes-stage"
         width={500}
         height={400}>
-        <Layer>
-          {backLines}
-          {nodeShapes}
-        </Layer>
+        {layer}
       </Stage>
     );
   }

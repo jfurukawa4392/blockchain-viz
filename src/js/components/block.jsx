@@ -46,7 +46,6 @@ class Block extends React.Component{
 
     return(
       <Group
-        ref={groupRef}
         onClick={() => this.handleClick(block)}
         onMouseEnter={() => this.handleHover()}
         onMouseLeave={() => this.handleMouseLeave()}>

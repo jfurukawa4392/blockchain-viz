@@ -33,7 +33,7 @@ class Node extends React.Component{
     let [ x, y ] = [ node.x, node.y ];
     fill = this.state.fill;
     stroke = '#679436';
-    text = idx;
+    text = "";
 
     if(node.miner){
       if(node.id === userNode.id){
