@@ -16,7 +16,9 @@ For the sake of this illustration, the user must be aware of the following facet
 - When a new block is written, that event is propagated to all other participants in the chain so everyone has the same set of verified facts
 
 ## Demo
-![cycle demo](docs/screenshots/verifying_transaction.gif)
+![make transaction](docs/screenshots/make_payment.gif)
+![mine block](docs/screenshots/mine_block.gif)
+![verify transaction](docs/screenshots/check_txn.gif)
 
 Above is an example of one full cycle. The user starts out as the top most miner node. After clicking on another node in the cluster, the user has the ability to pay that node a certain amount, not exceeding their current balance.
 
