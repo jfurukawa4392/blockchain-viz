@@ -21,15 +21,15 @@ class Detail extends React.Component{
 
   handleSubmitTxn(e){
     e.preventDefault();
-
     let { detail, userNode, unverifiedTxns } = this.props;
     let fromBalance = unverifiedTxns.reduce((acc, txn) => {
-      if(txn.from === userNode.id){
-        acc + txn.amount;
+      if(txn.from == userNode.id){
+        return acc + txn.amount;
       }
     }, 0);
+    fromBalance = fromBalance ? fromBalance : 0;
 
-    if(fromBalance + userNode.balance - this.state.amount < 0){
+    if(userNode.balance - fromBalance - this.state.amount < 0){
       this.setState({
         amount: 0,
         errors: "Not enough coins! Try mining a block..."

@@ -13223,19 +13223,19 @@ var Detail = function (_React$Component) {
     key: 'handleSubmitTxn',
     value: function handleSubmitTxn(e) {
       e.preventDefault();
-
       var _props = this.props,
           detail = _props.detail,
           userNode = _props.userNode,
           unverifiedTxns = _props.unverifiedTxns;
 
       var fromBalance = unverifiedTxns.reduce(function (acc, txn) {
-        if (txn.from === userNode.id) {
-          acc + txn.amount;
+        if (txn.from == userNode.id) {
+          return acc + txn.amount;
         }
       }, 0);
+      fromBalance = fromBalance ? fromBalance : 0;
 
-      if (fromBalance + userNode.balance - this.state.amount < 0) {
+      if (userNode.balance - fromBalance - this.state.amount < 0) {
         this.setState({
           amount: 0,
           errors: "Not enough coins! Try mining a block..."
