@@ -1,20 +1,38 @@
 import React from 'react';
+import isEqual from 'lodash/isequal';
 
 class Detail extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
-      amount: 0
+      amount: 0,
+      errors: ""
     };
+  }
+
+  componentWillUpdate(nextProps){
+    if(!isEqual(this.props.detail, nextProps.detail)){
+      this.setState({
+        errors: ""
+      });
+    }
   }
 
   handleSubmitTxn(e){
     e.preventDefault();
-    let { detail, userNode } = this.props;
+
+    let { detail, userNode, unverifiedTxns } = this.props;
+    let fromBalance = unverifiedTxns.reduce((acc, txn) => acc + txn.amount, 0);
+
+    if(fromBalance - this.state.amount < 0){
+      this.setState({
+        amount: 0,
+        errors: "Not enough coins! Try mining a block..."
+      });
+      return;
+    }
     let receiver = detail.id ? detail.id : userNode.id;
-    console.log(receiver);
-    console.log(userNode);
     this.props.receiveTxn({
       to: receiver,
       from: userNode.id,
@@ -22,7 +40,8 @@ class Detail extends React.Component{
     });
 
     this.setState({
-      amount: 0
+      amount: 0,
+      errors: ""
     });
   }
 
@@ -152,6 +171,10 @@ class Detail extends React.Component{
           <h3>{`${contentType ? contentType + " Data" : ""}`}</h3>
           { data }
           { txnForm }
+          <span
+            className="payment-errors">
+            { this.state.errors }
+          </span>
         </div>
         {description}
       </section>

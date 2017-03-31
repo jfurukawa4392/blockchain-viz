@@ -12776,7 +12776,12 @@ var ControlPanel = function (_React$Component) {
 
       newProgress = this.state.mineProgress + increment;
       if (newProgress >= 100) {
-        newBlock = { txns: unverifiedTxns, hash: makeHash() };
+        console.log(userNode);
+        newBlock = {
+          txns: unverifiedTxns,
+          hash: makeHash(),
+          minedBy: userNode
+        };
         this.props.mineBlock(newBlock);
         this.props.clearTransactions();
         this.setState({
@@ -12853,7 +12858,8 @@ var ControlPanel = function (_React$Component) {
           _react2.default.createElement(_detail2.default, {
             detail: this.props.detail,
             receiveTxn: this.props.receiveTransaction,
-            userNode: this.props.userNode })
+            userNode: this.props.userNode,
+            unverifiedTxns: this.props.unverifiedTxns })
         )
       );
     }
@@ -12911,6 +12917,10 @@ var _react = __webpack_require__(7);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _isequal = __webpack_require__(364);
+
+var _isequal2 = _interopRequireDefault(_isequal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12928,22 +12938,43 @@ var Detail = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this, props));
 
     _this.state = {
-      amount: 0
+      amount: 0,
+      errors: ""
     };
     return _this;
   }
 
   _createClass(Detail, [{
-    key: "handleSubmitTxn",
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps) {
+      if (!(0, _isequal2.default)(this.props.detail, nextProps.detail)) {
+        this.setState({
+          errors: ""
+        });
+      }
+    }
+  }, {
+    key: 'handleSubmitTxn',
     value: function handleSubmitTxn(e) {
       e.preventDefault();
+
       var _props = this.props,
           detail = _props.detail,
-          userNode = _props.userNode;
+          userNode = _props.userNode,
+          unverifiedTxns = _props.unverifiedTxns;
 
+      var fromBalance = unverifiedTxns.reduce(function (acc, txn) {
+        return acc + txn.amount;
+      }, 0);
+
+      if (fromBalance - this.state.amount < 0) {
+        this.setState({
+          amount: 0,
+          errors: "Not enough coins! Try mining a block..."
+        });
+        return;
+      }
       var receiver = detail.id ? detail.id : userNode.id;
-      console.log(receiver);
-      console.log(userNode);
       this.props.receiveTxn({
         to: receiver,
         from: userNode.id,
@@ -12951,18 +12982,19 @@ var Detail = function (_React$Component) {
       });
 
       this.setState({
-        amount: 0
+        amount: 0,
+        errors: ""
       });
     }
   }, {
-    key: "handleUpdate",
+    key: 'handleUpdate',
     value: function handleUpdate(e) {
       this.setState({
         amount: e.target.value
       });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this2 = this;
 
@@ -12980,171 +13012,177 @@ var Detail = function (_React$Component) {
         //block
         contentType = "Block";
         data = _react2.default.createElement(
-          "ul",
+          'ul',
           {
-            className: "raw-data" },
+            className: 'raw-data' },
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 1 },
-            "Hash: ",
+            'Hash: ',
             detail.hash
           ),
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 2 },
-            "Parent Block: ",
+            'Parent Block: ',
             detail.prevHash
           ),
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 3 },
-            "Transactions:",
+            'Transactions:',
             _react2.default.createElement(
-              "ul",
+              'ul',
               null,
               detail.txns.map(function (txn, idx) {
                 return _react2.default.createElement(
-                  "li",
+                  'li',
                   { key: idx },
-                  txn.from + " paid " + txn.amount + " to " + txn.to
+                  txn.from + ' paid ' + txn.amount + ' to ' + txn.to
                 );
               })
             )
           )
         );
         description = _react2.default.createElement(
-          "content",
+          'content',
           {
-            className: "description" },
-          "Blocks are bundled groups of transactions/data that have been mined by the miners, who are rewarded for their work with a set amount of cryptocurrency. As the computing power of a cluster increases, so does the competition and work required to successfully mine a block. ",
+            className: 'description' },
+          'Blocks are bundled groups of transactions/data that have been mined by the miners, who are rewarded for their work with a set amount of cryptocurrency. As the computing power of a cluster increases, so does the competition and work required to successfully mine a block. ',
           _react2.default.createElement(
-            "a",
-            { href: "http://www.blockchaintechnologies.com/blockchain-mining" },
-            "Read more about the math here."
+            'a',
+            { href: 'http://www.blockchaintechnologies.com/blockchain-mining' },
+            'Read more about the math here.'
           )
         );
       } else if (detail.id) {
         //node
         contentType = "Node";
         data = _react2.default.createElement(
-          "ul",
+          'ul',
           {
-            className: "raw-data" },
+            className: 'raw-data' },
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 1 },
-            "Address: ",
-            "" + detail.id
+            'Address: ',
+            '' + detail.id
           ),
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 2 },
-            "Coins: ",
-            "" + detail.balance
+            'Coins: ',
+            '' + detail.balance
           )
         );
         description = _react2.default.createElement(
-          "content",
+          'content',
           {
-            className: "description" },
-          "Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of addresses/accounts that can transact and send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants.",
-          _react2.default.createElement("br", null),
+            className: 'description' },
+          'Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of addresses/accounts that can transact and send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants.',
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            "a",
-            { href: "https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/" },
-            "Learn more about their differences here."
+            'a',
+            { href: 'https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/' },
+            'Learn more about their differences here.'
           )
         );
         txnForm = _react2.default.createElement(
-          "form",
+          'form',
           { onSubmit: function onSubmit(e) {
               return _this2.handleSubmitTxn(e);
             } },
           _react2.default.createElement(
-            "label",
+            'label',
             null,
-            "Payment Amount:",
-            _react2.default.createElement("input", {
-              type: "text",
+            'Payment Amount:',
+            _react2.default.createElement('input', {
+              type: 'text',
               onChange: function onChange(e) {
                 return _this2.handleUpdate(e);
               },
               value: this.state.amount }),
-            _react2.default.createElement("input", {
-              className: "payment-submit",
-              type: "submit",
-              value: "Pay selected node" })
+            _react2.default.createElement('input', {
+              className: 'payment-submit',
+              type: 'submit',
+              value: 'Pay selected node' })
           )
         );
       } else {
         contentType = "User Node";
         data = _react2.default.createElement(
-          "ul",
+          'ul',
           {
-            className: "raw-data" },
+            className: 'raw-data' },
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 1 },
-            "Address: ",
-            "" + userNode.id
+            'Address: ',
+            '' + userNode.id
           ),
           _react2.default.createElement(
-            "li",
+            'li',
             {
               key: 2 },
-            "Coins: ",
-            "" + userNode.balance
+            'Coins: ',
+            '' + userNode.balance
           )
         );
         description = _react2.default.createElement(
-          "content",
+          'content',
           {
-            className: "description" },
-          "The above diagram shows a basic illustration of the blockchain technology that is used by cryptocurrencies such as Bitcoin and Ethereum. It includes:",
+            className: 'description' },
+          'The above diagram shows a basic illustration of the blockchain technology that is used by cryptocurrencies such as Bitcoin and Ethereum. It includes:',
           _react2.default.createElement(
-            "ul",
+            'ul',
             null,
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "Nodes: represented by the circles/stars to the right are the computing nodes which can send transactions within the cryptocurrency economy."
+              'Nodes: represented by the circles/stars to the right are the computing nodes which can send transactions within the cryptocurrency economy.'
             ),
             _react2.default.createElement(
-              "li",
+              'li',
               null,
-              "Blockchain: The chain itself can be thought of as a record of ",
+              'Blockchain: The chain itself can be thought of as a record of ',
               _react2.default.createElement(
-                "span",
+                'span',
                 null,
-                "validated"
+                'validated'
               ),
-              " transactions that has occurred since the original block, known as the genesis block."
+              ' transactions that has occurred since the original block, known as the genesis block.'
             )
           )
         );
       }
 
       return _react2.default.createElement(
-        "section",
+        'section',
         {
-          className: "detail-inner" },
+          className: 'detail-inner' },
         _react2.default.createElement(
-          "div",
+          'div',
           {
-            className: "data-container" },
+            className: 'data-container' },
           _react2.default.createElement(
-            "h3",
+            'h3',
             null,
-            "" + (contentType ? contentType + " Data" : "")
+            '' + (contentType ? contentType + " Data" : "")
           ),
           data,
-          txnForm
+          txnForm,
+          _react2.default.createElement(
+            'span',
+            {
+              className: 'payment-errors' },
+            this.state.errors
+          )
         ),
         description
       );
@@ -13742,6 +13780,9 @@ var NodesReducer = function NodesReducer() {
           }
         }
       });
+      newState.filter(function (node) {
+        return node.id === action.block.minedBy.id;
+      })[0].balance += 25;
       return newState;
     default:
       return state;
@@ -13827,7 +13868,6 @@ var TransactionsReducer = function TransactionsReducer() {
         return Object.assign({}, txn);
       });
       newState.push(action.txn);
-      console.log(newState);
       return newState;
     case _transactions_actions.CLEAR_TRANSACTIONS:
       return [];
@@ -13871,6 +13911,7 @@ var UserNodeReducer = function UserNodeReducer() {
       newState = (0, _merge2.default)({}, state);
       newState.balance += 25;
       newState.minedBlocks.push(action.block.hash);
+      return newState;
     default:
       return state;
   }
@@ -47314,6 +47355,1023 @@ function symbolObservablePonyfill(root) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 340 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var SetCache = __webpack_require__(344),
+    arraySome = __webpack_require__(348),
+    cacheHas = __webpack_require__(353);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for arrays with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Array} array The array to compare.
+ * @param {Array} other The other array to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `array` and `other` objects.
+ * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+ */
+function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      arrLength = array.length,
+      othLength = other.length;
+
+  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+    return false;
+  }
+  // Assume cyclic values are equal.
+  var stacked = stack.get(array);
+  if (stacked && stack.get(other)) {
+    return stacked == other;
+  }
+  var index = -1,
+      result = true,
+      seen = (bitmask & COMPARE_UNORDERED_FLAG) ? new SetCache : undefined;
+
+  stack.set(array, other);
+  stack.set(other, array);
+
+  // Ignore non-index properties.
+  while (++index < arrLength) {
+    var arrValue = array[index],
+        othValue = other[index];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, arrValue, index, other, array, stack)
+        : customizer(arrValue, othValue, index, array, other, stack);
+    }
+    if (compared !== undefined) {
+      if (compared) {
+        continue;
+      }
+      result = false;
+      break;
+    }
+    // Recursively compare arrays (susceptible to call stack limits).
+    if (seen) {
+      if (!arraySome(other, function(othValue, othIndex) {
+            if (!cacheHas(seen, othIndex) &&
+                (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+              return seen.push(othIndex);
+            }
+          })) {
+        result = false;
+        break;
+      }
+    } else if (!(
+          arrValue === othValue ||
+            equalFunc(arrValue, othValue, bitmask, customizer, stack)
+        )) {
+      result = false;
+      break;
+    }
+  }
+  stack['delete'](array);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalArrays;
+
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(53),
+    root = __webpack_require__(23);
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView');
+
+module.exports = DataView;
+
+
+/***/ }),
+/* 342 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(53),
+    root = __webpack_require__(23);
+
+/* Built-in method references that are verified to be native. */
+var Promise = getNative(root, 'Promise');
+
+module.exports = Promise;
+
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(53),
+    root = __webpack_require__(23);
+
+/* Built-in method references that are verified to be native. */
+var Set = getNative(root, 'Set');
+
+module.exports = Set;
+
+
+/***/ }),
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(173),
+    setCacheAdd = __webpack_require__(361),
+    setCacheHas = __webpack_require__(362);
+
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+
+  this.__data__ = new MapCache;
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+
+// Add methods to `SetCache`.
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+
+module.exports = SetCache;
+
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(53),
+    root = __webpack_require__(23);
+
+/* Built-in method references that are verified to be native. */
+var WeakMap = getNative(root, 'WeakMap');
+
+module.exports = WeakMap;
+
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = arrayFilter;
+
+
+/***/ }),
+/* 347 */
+/***/ (function(module, exports) {
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+module.exports = arrayPush;
+
+
+/***/ }),
+/* 348 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+module.exports = arraySome;
+
+
+/***/ }),
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(347),
+    isArray = __webpack_require__(92);
+
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+
+module.exports = baseGetAllKeys;
+
+
+/***/ }),
+/* 350 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqualDeep = __webpack_require__(351),
+    isObjectLike = __webpack_require__(27);
+
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+
+module.exports = baseIsEqual;
+
+
+/***/ }),
+/* 351 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(174),
+    equalArrays = __webpack_require__(340),
+    equalByTag = __webpack_require__(354),
+    equalObjects = __webpack_require__(355),
+    getTag = __webpack_require__(358),
+    isArray = __webpack_require__(92),
+    isBuffer = __webpack_require__(93),
+    isTypedArray = __webpack_require__(95);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = objIsArr ? arrayTag : getTag(object),
+      othTag = othIsArr ? arrayTag : getTag(other);
+
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+    objIsArr = true;
+    objIsObj = false;
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack);
+    return (objIsArr || isTypedArray(object))
+      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object,
+          othUnwrapped = othIsWrapped ? other.value() : other;
+
+      stack || (stack = new Stack);
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stack || (stack = new Stack);
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+
+module.exports = baseIsEqualDeep;
+
+
+/***/ }),
+/* 352 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(89),
+    nativeKeys = __webpack_require__(360);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+/* 353 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+
+module.exports = cacheHas;
+
+
+/***/ }),
+/* 354 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(83),
+    Uint8Array = __webpack_require__(175),
+    eq = __webpack_require__(38),
+    equalArrays = __webpack_require__(340),
+    mapToArray = __webpack_require__(359),
+    setToArray = __webpack_require__(363);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/** `Object#toString` result references. */
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]';
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag:
+      if ((object.byteLength != other.byteLength) ||
+          (object.byteOffset != other.byteOffset)) {
+        return false;
+      }
+      object = object.buffer;
+      other = other.buffer;
+
+    case arrayBufferTag:
+      if ((object.byteLength != other.byteLength) ||
+          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+        return false;
+      }
+      return true;
+
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
+      return eq(+object, +other);
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case regexpTag:
+    case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
+      return object == (other + '');
+
+    case mapTag:
+      var convert = mapToArray;
+
+    case setTag:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
+      convert || (convert = setToArray);
+
+      if (object.size != other.size && !isPartial) {
+        return false;
+      }
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked) {
+        return stacked == other;
+      }
+      bitmask |= COMPARE_UNORDERED_FLAG;
+
+      // Recursively compare objects (susceptible to call stack limits).
+      stack.set(object, other);
+      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
+      stack['delete'](object);
+      return result;
+
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+  }
+  return false;
+}
+
+module.exports = equalByTag;
+
+
+/***/ }),
+/* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getAllKeys = __webpack_require__(356);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      objProps = getAllKeys(object),
+      objLength = objProps.length,
+      othProps = getAllKeys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+  var index = objLength;
+  while (index--) {
+    var key = objProps[index];
+    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+      return false;
+    }
+  }
+  // Assume cyclic values are equal.
+  var stacked = stack.get(object);
+  if (stacked && stack.get(other)) {
+    return stacked == other;
+  }
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+
+  var skipCtor = isPartial;
+  while (++index < objLength) {
+    key = objProps[index];
+    var objValue = object[key],
+        othValue = other[key];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, objValue, key, other, object, stack)
+        : customizer(objValue, othValue, key, object, other, stack);
+    }
+    // Recursively compare objects (susceptible to call stack limits).
+    if (!(compared === undefined
+          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
+          : compared
+        )) {
+      result = false;
+      break;
+    }
+    skipCtor || (skipCtor = key == 'constructor');
+  }
+  if (result && !skipCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor;
+
+    // Non `Object` object instances with different constructors are not equal.
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+  stack['delete'](object);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalObjects;
+
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetAllKeys = __webpack_require__(349),
+    getSymbols = __webpack_require__(357),
+    keys = __webpack_require__(365);
+
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+
+module.exports = getAllKeys;
+
+
+/***/ }),
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayFilter = __webpack_require__(346),
+    stubArray = __webpack_require__(366);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function(symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+
+module.exports = getSymbols;
+
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DataView = __webpack_require__(341),
+    Map = __webpack_require__(82),
+    Promise = __webpack_require__(342),
+    Set = __webpack_require__(343),
+    WeakMap = __webpack_require__(345),
+    baseGetTag = __webpack_require__(35),
+    toSource = __webpack_require__(232);
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+module.exports = getTag;
+
+
+/***/ }),
+/* 359 */
+/***/ (function(module, exports) {
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+module.exports = mapToArray;
+
+
+/***/ }),
+/* 360 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(223);
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+/* 361 */
+/***/ (function(module, exports) {
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+
+module.exports = setCacheAdd;
+
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+function setCacheHas(value) {
+  return this.__data__.has(value);
+}
+
+module.exports = setCacheHas;
+
+
+/***/ }),
+/* 363 */
+/***/ (function(module, exports) {
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+module.exports = setToArray;
+
+
+/***/ }),
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqual = __webpack_require__(350);
+
+/**
+ * Performs a deep comparison between two values to determine if they are
+ * equivalent.
+ *
+ * **Note:** This method supports comparing arrays, array buffers, booleans,
+ * date objects, error objects, maps, numbers, `Object` objects, regexes,
+ * sets, strings, symbols, and typed arrays. `Object` objects are compared
+ * by their own, not inherited, enumerable properties. Functions and DOM
+ * nodes are compared by strict equality, i.e. `===`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.isEqual(object, other);
+ * // => true
+ *
+ * object === other;
+ * // => false
+ */
+function isEqual(value, other) {
+  return baseIsEqual(value, other);
+}
+
+module.exports = isEqual;
+
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(177),
+    baseKeys = __webpack_require__(352),
+    isArrayLike = __webpack_require__(54);
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
+
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+function stubArray() {
+  return [];
+}
+
+module.exports = stubArray;
+
 
 /***/ })
 /******/ ]);

@@ -12,7 +12,6 @@ const TransactionsReducer = (state = [], action) => {
     case(RECEIVE_TRANSACTION):
       newState = state.map(txn => Object.assign({}, txn));
       newState.push(action.txn);
-      console.log(newState);
       return newState;
     case(CLEAR_TRANSACTIONS):
       return [];

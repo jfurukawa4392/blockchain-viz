@@ -36,7 +36,12 @@ class ControlPanel extends React.Component{
 
     newProgress = this.state.mineProgress + increment;
     if(newProgress >= 100){
-      newBlock = { txns: unverifiedTxns, hash: makeHash() };
+      console.log(userNode);
+      newBlock = {
+        txns: unverifiedTxns,
+        hash: makeHash(),
+        minedBy: userNode
+      };
       this.props.mineBlock(newBlock);
       this.props.clearTransactions();
       this.setState({
@@ -90,7 +95,8 @@ class ControlPanel extends React.Component{
           <Detail
             detail={this.props.detail}
             receiveTxn={this.props.receiveTransaction}
-            userNode={this.props.userNode}/>
+            userNode={this.props.userNode}
+            unverifiedTxns={this.props.unverifiedTxns}/>
         </div>
       </aside>
     );

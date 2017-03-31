@@ -11,6 +11,7 @@ const UserNodeReducer = (state = {}, action) => {
       newState = merge({}, state);
       newState.balance += 25;
       newState.minedBlocks.push(action.block.hash);
+      return newState;
     default:
       return state;
   }

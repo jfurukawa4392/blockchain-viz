@@ -57,6 +57,7 @@ const NodesReducer = (state = _nodes, action) => {
           }
         }
       });
+      newState.filter((node) => node.id === action.block.minedBy.id)[0].balance += 25;
       return newState;
     default:
       return state;
