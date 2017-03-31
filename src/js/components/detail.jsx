@@ -79,7 +79,7 @@ const Detail = (props) => {
       </form>
     );
   } else {
-    contentType = "Node";
+    contentType = "User Node";
     data = (
       <ul
         className="raw-data">
@@ -89,9 +89,6 @@ const Detail = (props) => {
         </li>
       </ul>
     );
-    // JSON.stringify({
-    //           "Address": userNode.id
-    //         }, null, 2);
     description = (
       <content
         className="description">
