@@ -5,13 +5,15 @@ body {
 .app-outer {
   display: flex;
   flex-direction: column;
-  width: 1080px;
-  margin-top: 50px;
+  height: auto;
+  margin: 5px 10px 10px 10px;
   background-color: #EBF2FA;
-  padding: 30px;
+  padding: 5px 30px 30px 30px;
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center; }
+  .app-outer h1 {
+    margin: 0; }
 
 #root {
   display: flex;
@@ -21,7 +23,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 10px; }
+  margin: 10px 0 10px 0; }
 
 .blockchain-outer {
   height: 400px;
@@ -46,8 +48,18 @@ body {
   flex-direction: column;
   width: 25%; }
   .control-inner h3 {
+    font-size: 22px;
     -webkit-margin-before: 3px;
     -webkit-margin-after: 3px; }
+  .control-inner .buttons {
+    height: 25%;
+    display: flex;
+    justify-content: space-between; }
+    .control-inner .buttons button {
+      background-color: #A5BE00; }
+      .control-inner .buttons button:active {
+        background-color: #679436;
+        color: #EBF2FA; }
 
 .detail-container {
   width: 75%;

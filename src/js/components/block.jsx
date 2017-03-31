@@ -27,7 +27,7 @@ class Block extends React.Component{
   }
 
   render(){
-    let { idx, x, y, block } = this.props;
+    let { idx, x, y, block, groupRef } = this.props;
     let text = `Block ${idx}`;
 
     let arrow = null;
@@ -46,6 +46,7 @@ class Block extends React.Component{
 
     return(
       <Group
+        ref={groupRef}
         onClick={() => this.handleClick(block)}
         onMouseEnter={() => this.handleHover()}
         onMouseLeave={() => this.handleMouseLeave()}>

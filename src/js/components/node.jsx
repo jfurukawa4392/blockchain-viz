@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layer, Line, Text, Circle, Star, Stage, Group } from 'react-konva';
+import { Text, Circle, Star, Group } from 'react-konva';
 
 class Node extends React.Component{
   constructor(props){
@@ -63,6 +63,8 @@ class Node extends React.Component{
             stroke={fill}/>
         );
     }
+
+
 
     return(
       <Group

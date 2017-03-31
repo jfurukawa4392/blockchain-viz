@@ -12,6 +12,7 @@ class Blockchain extends React.Component {
     this.state = {
       loading: true,
     };
+    this.chainEnd;
   }
 
   componentDidMount(){
@@ -23,30 +24,48 @@ class Blockchain extends React.Component {
     }
   }
 
-  componentDidUpdate(){
-    const divMarker = ReactDOM.findDOMNode(this.chainEnd);
-    if(divMarker){
-      divMarker.scrollIntoView();
-    }
+  componentDidUpdate(prevProps){
+    // if(prevProps.blocks.length < this.props.blocks.length){
+    //   const chainEnd = ReactDOM.findDOMNode(this.chainEnd);
+    //   if(chainEnd){
+    //     chainEnd.scrollIntoView();
+    //   }
+    // }
   }
 
   render(){
     //get blocks from store and render them with arrows
     let chain = [];
+    let blockShape;
     let { blocks } = this.props;
     let [ x, y ] = [ 75, -75 ];
 
     chain = blocks.map((block, idx) => {
         y += 100;
-        return(
-          <Block
-            key={idx}
-            idx={idx}
-            receiveBlock={this.props.receiveBlock}
-            block={block}
-            x={x}
-            y={y}/>
-        );
+        if(idx < blocks.length-1){
+          blockShape = (
+            <Block
+              groupRef="not-last"
+              key={idx}
+              idx={idx}
+              receiveBlock={this.props.receiveBlock}
+              block={block}
+              x={x}
+              y={y}/>
+          );
+        } else {
+          blockShape = (
+            <Block
+              groupRef="last"
+              key={idx}
+              idx={idx}
+              receiveBlock={this.props.receiveBlock}
+              block={block}
+              x={x}
+              y={y}/>
+          );
+        }
+        return blockShape;
       }
     );
 

@@ -8,13 +8,16 @@ body{
 .app-outer{
   display: flex;
   flex-direction: column;
-  width: 1080px;
-  margin-top: 50px;
+  height: auto;
+  margin: 5px 10px 10px 10px;
   background-color: $off-white;
-  padding: 30px;
+  padding: 5px 30px 30px 30px;
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center;
+  h1{
+    margin: 0;
+  }
 }
 
 #root{

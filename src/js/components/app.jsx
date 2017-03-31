@@ -9,6 +9,16 @@ class App extends React.Component{
     super(props);
   }
 
+  componentDidUpdate(prevProps){
+    if(prevProps.blocks.length < this.props.blocks.length){
+      const chainEnd = ReactDOM.findDOMNode(this.chainEnd);
+      console.log(chainEnd);
+      if(chainEnd){
+        chainEnd.scrollIntoView();
+      }
+    }
+  }
+
   render(){
     return(
       <content

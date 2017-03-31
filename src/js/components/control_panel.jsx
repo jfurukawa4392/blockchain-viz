@@ -45,7 +45,7 @@ class ControlPanel extends React.Component{
     this.props.receiveTransaction({
       to: receiver,
       from: userNode.id,
-      amount: 10
+      amount: 5
     });
   }
 

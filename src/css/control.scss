@@ -16,8 +16,21 @@
   flex-direction: column;
   width: 25%;
   h3{
+    font-size: 22px;
     -webkit-margin-before: 3px;
     -webkit-margin-after: 3px;
+  }
+  .buttons{
+    height: 25%;
+    display: flex;
+    justify-content: space-between;
+    button{
+      background-color: $light-green;
+      &:active{
+        background-color: $dark-green;
+        color: $off-white;
+      }
+    }
   }
 }
 
