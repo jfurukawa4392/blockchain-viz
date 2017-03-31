@@ -17,12 +17,11 @@ For the sake of this illustration, the user must be aware of the following facet
 
 ## Demo
 ![make transaction](docs/screenshots/make_payment.gif)
-![mine block](docs/screenshots/mine_block.gif)
-![verify transaction](docs/screenshots/check_txn.gif)
-
 Above is an example of one full cycle. The user starts out as the top most miner node. After clicking on another node in the cluster, the user has the ability to pay that node a certain amount, not exceeding their current balance.
 
-Once the transaction is accepted, however, it isn't immediately reflected, it is simply broadcasted to other nodes as an unverified transaction until a miner bundles it into and mines a block on the chain. The user is currently the only node that has the option to mine or transact, but once the user clicks the "mine" button enough and creates a new block, those transaction effects are reflected in all nodes' account balances.
+![mine block](docs/screenshots/mine_block.gif)
+Once the transaction is accepted, however, it isn't immediately reflected, it is simply broadcasted to other nodes as an unverified transaction until a miner bundles it into and mines a block on the chain. The user is currently the only node that has the option to mine or transact, but once the user clicks the "mine" button enough and creates a new block, those transaction effects are reflected in all nodes' account balances:
+![verify transaction](docs/screenshots/check_txn.gif)
 
 
 ## Future Improvements
