@@ -15,7 +15,6 @@ class ControlPanel extends React.Component{
     };
 
     this.handleMineClick = this.handleMineClick.bind(this);
-    this.emitTxn = this.emitTxn.bind(this);
   }
 
   componentWillUpdate(nextProps){
@@ -36,7 +35,6 @@ class ControlPanel extends React.Component{
 
     newProgress = this.state.mineProgress + increment;
     if(newProgress >= 100){
-      console.log(userNode);
       newBlock = {
         txns: unverifiedTxns,
         hash: makeHash(),
@@ -52,17 +50,6 @@ class ControlPanel extends React.Component{
         mineProgress: newProgress
       });
     }
-  }
-
-  emitTxn(){
-    let { detail, userNode } = this.props;
-    let receiver = detail.id ? detail.id : userNode.id;
-
-    this.props.receiveTransaction({
-      to: receiver,
-      from: userNode.id,
-      amount: 5
-    });
   }
 
   render(){

@@ -15,7 +15,9 @@ For the sake of this illustration, the user must be aware of the following facet
 ## Functionality and MVP
 This visualization of the blockchain should allow users to
 - Examine a selected block that exists in the chain
-- Play/Pause the blockchain animation lifecycle
+- Examine a selected node in the cluster
+- Participate in the interactive lifecycle of the blockchain
+- Mine a block and add to the chain
 
 ## Wireframes
 The window of this app should be split into 3 sections:
