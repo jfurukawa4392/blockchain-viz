@@ -36,6 +36,7 @@
 
 .detail-container{
   width: 75%;
+  height: auto;
   display: flex;
   justify-content: space-between;
 }
@@ -52,19 +53,23 @@
 .data-container{
   display: flex;
   flex-direction: column;
-  width: 25%;
+  border: 3px solid gray;
+  border-radius: 2px;
+  width: 35%;
   height: 100%;
   box-sizing: border-box;
-  padding: 10px 10px 10px 0;
+  padding: 10px 5px 10px 10px;
   font-size: 16px;
-  .raw-data{
-    display: flex;
-    flex-wrap: wrap;
+  overflow: scroll;
+  h3{
+    margin: 0;
   }
 }
 
 .description{
   width: 65%;
+  padding: 0 5px 0 10px;
+  display: block;
 }
 
 .rc-progress-circle{

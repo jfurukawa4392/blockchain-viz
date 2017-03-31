@@ -8,7 +8,7 @@ body {
   height: auto;
   margin: 5px 10px 10px 10px;
   background-color: #EBF2FA;
-  padding: 5px 30px 30px 30px;
+  padding: 5px 15px 15px 15px;
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center; }
@@ -63,6 +63,7 @@ body {
 
 .detail-container {
   width: 75%;
+  height: auto;
   display: flex;
   justify-content: space-between; }
 
@@ -77,17 +78,21 @@ body {
 .data-container {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  border: 3px solid gray;
+  border-radius: 2px;
+  width: 35%;
   height: 100%;
   box-sizing: border-box;
-  padding: 10px 10px 10px 0;
-  font-size: 16px; }
-  .data-container .raw-data {
-    display: flex;
-    flex-wrap: wrap; }
+  padding: 10px 5px 10px 10px;
+  font-size: 16px;
+  overflow: scroll; }
+  .data-container h3 {
+    margin: 0; }
 
 .description {
-  width: 65%; }
+  width: 65%;
+  padding: 0 5px 0 10px;
+  display: block; }
 
 .rc-progress-circle {
   width: 60%; }
