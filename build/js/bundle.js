@@ -777,7 +777,7 @@ module.exports = ExecutionEnvironment;
 "use strict";
 
 
-module.exports = __webpack_require__(17);
+module.exports = __webpack_require__(18);
 
 
 /***/ }),
@@ -798,7 +798,7 @@ module.exports = __webpack_require__(17);
 
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
 var ReactCurrentOwner = __webpack_require__(12);
 
@@ -1215,7 +1215,7 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(99);
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 var ReactFeatureFlags = __webpack_require__(104);
 var ReactReconciler = __webpack_require__(26);
 var Transaction = __webpack_require__(43);
@@ -1506,7 +1506,7 @@ module.exports = ReactCurrentOwner;
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 
 var emptyFunction = __webpack_require__(10);
 var warning = __webpack_require__(2);
@@ -1979,6 +1979,33 @@ module.exports = DOMProperty;
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var MINE_BLOCK = exports.MINE_BLOCK = 'MINE_BLOCK';
+var RECEIVE_BLOCK = exports.RECEIVE_BLOCK = 'RECEIVE_BLOCK';
+
+var mineBlock = exports.mineBlock = function mineBlock(block) {
+  return {
+    type: MINE_BLOCK,
+    block: block
+  };
+};
+
+var receiveBlock = exports.receiveBlock = function receiveBlock(block) {
+  return {
+    type: RECEIVE_BLOCK,
+    block: block
+  };
+};
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports) {
 
 /**
@@ -2015,7 +2042,7 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2133,7 +2160,7 @@ module.exports = PooledClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2156,7 +2183,7 @@ var ReactComponent = __webpack_require__(72);
 var ReactPureComponent = __webpack_require__(326);
 var ReactClass = __webpack_require__(323);
 var ReactDOMFactories = __webpack_require__(324);
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 var ReactPropTypes = __webpack_require__(325);
 var ReactVersion = __webpack_require__(327);
 
@@ -2228,7 +2255,7 @@ module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2575,7 +2602,7 @@ module.exports = ReactElement;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2617,35 +2644,6 @@ function reactProdInvariant(code) {
 }
 
 module.exports = reactProdInvariant;
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var MINE_BLOCK = exports.MINE_BLOCK = 'MINE_BLOCK';
-var RECEIVE_BLOCK = exports.RECEIVE_BLOCK = 'RECEIVE_BLOCK';
-
-var mineBlock = exports.mineBlock = function mineBlock() {
-  var txns = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-  return {
-    type: MINE_BLOCK,
-    txns: txns
-  };
-};
-
-var receiveBlock = exports.receiveBlock = function receiveBlock(block) {
-  return {
-    type: RECEIVE_BLOCK,
-    block: block
-  };
-};
 
 /***/ }),
 /* 21 */
@@ -3611,7 +3609,7 @@ module.exports = SyntheticUIEvent;
 // https://github.com/reactjs/react-art
 
 var Konva = __webpack_require__(163);
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 
 var ReactInstanceMap = __webpack_require__(25);
 var ReactMultiChild = __webpack_require__(108);
@@ -5732,7 +5730,7 @@ module.exports = isArrayLike;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(35),
-    isObject = __webpack_require__(15);
+    isObject = __webpack_require__(16);
 
 /** `Object#toString` result references. */
 var asyncTag = '[object AsyncFunction]',
@@ -6341,7 +6339,7 @@ module.exports = KeyEscapeUtils;
 
 var _prodInvariant = __webpack_require__(3);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactPropTypesSecret = __webpack_require__(110);
 
 var invariant = __webpack_require__(1);
@@ -7555,7 +7553,7 @@ function warning(message) {
 
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
 var ReactNoopUpdateQueue = __webpack_require__(73);
 
@@ -8694,7 +8692,7 @@ var _prodInvariant = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 
 var invariant = __webpack_require__(1);
 
@@ -9555,7 +9553,7 @@ var _prodInvariant = __webpack_require__(3);
 
 var DOMLazyTree = __webpack_require__(24);
 var DOMProperty = __webpack_require__(14);
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactBrowserEventEmitter = __webpack_require__(41);
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactDOMComponentTree = __webpack_require__(5);
@@ -10554,7 +10552,7 @@ module.exports = ReactMultiChild;
 
 var _prodInvariant = __webpack_require__(3);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 
 var invariant = __webpack_require__(1);
 
@@ -11694,7 +11692,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactComponentTreeHook = __webpack_require__(8);
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 
 var checkReactTypeSpec = __webpack_require__(328);
 
@@ -12569,7 +12567,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(46);
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 var _reactKonva = __webpack_require__(31);
 
@@ -12714,7 +12712,7 @@ var _transactions_actions = __webpack_require__(77);
 
 var _node_actions = __webpack_require__(21);
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 var _rcProgress = __webpack_require__(240);
 
@@ -12750,17 +12748,36 @@ var ControlPanel = function (_React$Component) {
   }
 
   _createClass(ControlPanel, [{
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps) {
+      var _props = this.props,
+          userNode = _props.userNode,
+          blocks = _props.blocks;
+
+      var newNode = userNode;
+
+      if (blocks.length < nextProps.blocks.length) {
+        newNode.minedBlocks.push(blocks[blocks.length - 1]);
+        this.props.receiveNode(newNode);
+      }
+    }
+  }, {
     key: 'handleMineClick',
     value: function handleMineClick() {
       var increment = 50;
-      var newProgress = void 0;
-      var blocks = this.props.blocks;
+      var newProgress = void 0,
+          newBlock = void 0;
+      var _props2 = this.props,
+          blocks = _props2.blocks,
+          unverifiedTxns = _props2.unverifiedTxns,
+          userNode = _props2.userNode;
 
       if (blocks) increment = Math.floor(increment / blocks.length);
 
       newProgress = this.state.mineProgress + increment;
       if (newProgress >= 100) {
-        this.props.mineBlock(this.props.unverifiedTxns);
+        newBlock = { txns: unverifiedTxns, hash: makeHash() };
+        this.props.mineBlock(newBlock);
         this.props.clearTransactions();
         this.setState({
           mineProgress: 0
@@ -12774,9 +12791,9 @@ var ControlPanel = function (_React$Component) {
   }, {
     key: 'emitTxn',
     value: function emitTxn() {
-      var _props = this.props,
-          detail = _props.detail,
-          userNode = _props.userNode;
+      var _props3 = this.props,
+          detail = _props3.detail,
+          userNode = _props3.userNode;
 
       var receiver = detail.id ? detail.id : userNode.id;
 
@@ -12825,15 +12842,7 @@ var ControlPanel = function (_React$Component) {
                 onClick: function onClick() {
                   return _this2.handleMineClick();
                 } },
-              'Mine!'
-            ),
-            _react2.default.createElement(
-              'button',
-              {
-                onClick: function onClick() {
-                  return _this2.emitTxn();
-                } },
-              'Emit Transaction'
+              'Press Here to Mine!'
             )
           )
         ),
@@ -12852,6 +12861,10 @@ var ControlPanel = function (_React$Component) {
 
   return ControlPanel;
 }(_react2.default.Component);
+
+var makeHash = function makeHash() {
+  return Math.random().toString(36).slice(12);
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -12872,6 +12885,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     clearTransactions: function clearTransactions() {
       return dispatch((0, _transactions_actions.clearTransactions)());
+    },
+    receiveNode: function receiveNode(node) {
+      return dispatch((0, _node_actions.receiveNode)(node));
     }
   };
 };
@@ -12889,189 +12905,254 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(7);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Detail = function Detail(props) {
-  var detail = props.detail,
-      receiveTxn = props.receiveTxn,
-      userNode = props.userNode;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var description = void 0,
-      txnForm = void 0,
-      data = void 0;
-  var contentType = null;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  if (detail.hash) {
-    //block
-    contentType = "Block";
-    data = _react2.default.createElement(
-      "ul",
-      {
-        className: "raw-data" },
-      _react2.default.createElement(
-        "li",
-        {
-          key: 1 },
-        "Hash: ",
-        detail.hash
-      ),
-      _react2.default.createElement(
-        "li",
-        {
-          key: 2 },
-        "Parent Block: ",
-        detail.prevHash
-      ),
-      _react2.default.createElement(
-        "li",
-        {
-          key: 3 },
-        "Transactions:",
-        _react2.default.createElement(
-          "ul",
-          null,
-          detail.txns.map(function (txn, idx) {
-            return _react2.default.createElement(
-              "li",
-              { key: idx },
-              txn.from + " paid " + txn.amount + " to " + txn.to
-            );
-          })
-        )
-      )
-    );
-    description = _react2.default.createElement(
-      "content",
-      {
-        className: "description" },
-      "Blocks are bundled groups of transactions/data that have been mined by the miners, who are rewarded for their work with a set amount of cryptocurrency. As the computing power of a cluster increases, so does the competition and work required to successfully mine a block. ",
-      _react2.default.createElement(
-        "a",
-        { href: "http://www.blockchaintechnologies.com/blockchain-mining" },
-        "Read more about the math here."
-      )
-    );
-  } else if (detail.id) {
-    //node
-    contentType = "Node";
-    data = _react2.default.createElement(
-      "ul",
-      {
-        className: "raw-data" },
-      _react2.default.createElement(
-        "li",
-        {
-          key: 1 },
-        "Address: ",
-        "" + detail.id
-      ),
-      _react2.default.createElement(
-        "li",
-        {
-          key: 2 },
-        "Coins: ",
-        "" + detail.balance
-      )
-    );
-    description = _react2.default.createElement(
-      "content",
-      {
-        className: "description" },
-      "Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of addresses/accounts that can transact and send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants. Participants",
-      _react2.default.createElement(
-        "a",
-        { href: "https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/" },
-        "Learn more about their differences here."
-      )
-    );
-    txnForm = _react2.default.createElement(
-      "form",
-      { onSubmit: function onSubmit(amt) {
-          receiveTxn({
-            to: detail.id,
-            from: userNode.id,
-            amount: amt
-          });
-        } },
-      _react2.default.createElement(
-        "label",
-        null,
-        "Amount",
-        _react2.default.createElement("input", { type: "text", name: "amt" })
-      ),
-      _react2.default.createElement("input", { type: "submit" })
-    );
-  } else {
-    contentType = "User Node";
-    data = _react2.default.createElement(
-      "ul",
-      {
-        className: "raw-data" },
-      _react2.default.createElement(
-        "li",
-        {
-          key: 1 },
-        "Address: ",
-        "" + userNode.id
-      ),
-      _react2.default.createElement(
-        "li",
-        {
-          key: 2 },
-        "Coins: ",
-        "" + userNode.balance
-      )
-    );
-    description = _react2.default.createElement(
-      "content",
-      {
-        className: "description" },
-      "The above diagram shows a basic illustration of the blockchain technology that is used by cryptocurrencies such as Bitcoin and Ethereum. It includes:",
-      _react2.default.createElement(
-        "ul",
-        null,
-        _react2.default.createElement(
-          "li",
-          null,
-          "Nodes: represented by the circles/stars to the right are the computing nodes which can send transactions within the cryptocurrency economy."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Blockchain: The chain itself can be thought of a record of ",
-          _react2.default.createElement(
-            "span",
-            null,
-            "validated"
-          ),
-          " transactions that has occurred since the original block, known as the genesis block."
-        )
-      )
-    );
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Detail = function (_React$Component) {
+  _inherits(Detail, _React$Component);
+
+  function Detail(props) {
+    _classCallCheck(this, Detail);
+
+    var _this = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this, props));
+
+    _this.state = {
+      amount: 0
+    };
+    return _this;
   }
 
-  return _react2.default.createElement(
-    "section",
-    {
-      className: "detail-inner" },
-    _react2.default.createElement(
-      "div",
-      {
-        className: "data-container" },
-      _react2.default.createElement(
-        "h3",
-        null,
-        "" + (contentType ? contentType + " Data" : "")
-      ),
-      data
-    ),
-    description
-  );
-};
+  _createClass(Detail, [{
+    key: "handleSubmitTxn",
+    value: function handleSubmitTxn(e) {
+      e.preventDefault();
+      var _props = this.props,
+          detail = _props.detail,
+          userNode = _props.userNode;
+
+      var receiver = detail.id ? detail.id : userNode.id;
+      console.log(receiver);
+      console.log(userNode);
+      this.props.receiveTxn({
+        to: receiver,
+        from: userNode.id,
+        amount: parseInt(this.state.amount)
+      });
+
+      this.setState({
+        amount: 0
+      });
+    }
+  }, {
+    key: "handleUpdate",
+    value: function handleUpdate(e) {
+      this.setState({
+        amount: e.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _props2 = this.props,
+          detail = _props2.detail,
+          receiveTxn = _props2.receiveTxn,
+          userNode = _props2.userNode;
+
+      var description = void 0,
+          txnForm = void 0,
+          data = void 0;
+      var contentType = null;
+
+      if (detail.hash) {
+        //block
+        contentType = "Block";
+        data = _react2.default.createElement(
+          "ul",
+          {
+            className: "raw-data" },
+          _react2.default.createElement(
+            "li",
+            {
+              key: 1 },
+            "Hash: ",
+            detail.hash
+          ),
+          _react2.default.createElement(
+            "li",
+            {
+              key: 2 },
+            "Parent Block: ",
+            detail.prevHash
+          ),
+          _react2.default.createElement(
+            "li",
+            {
+              key: 3 },
+            "Transactions:",
+            _react2.default.createElement(
+              "ul",
+              null,
+              detail.txns.map(function (txn, idx) {
+                return _react2.default.createElement(
+                  "li",
+                  { key: idx },
+                  txn.from + " paid " + txn.amount + " to " + txn.to
+                );
+              })
+            )
+          )
+        );
+        description = _react2.default.createElement(
+          "content",
+          {
+            className: "description" },
+          "Blocks are bundled groups of transactions/data that have been mined by the miners, who are rewarded for their work with a set amount of cryptocurrency. As the computing power of a cluster increases, so does the competition and work required to successfully mine a block. ",
+          _react2.default.createElement(
+            "a",
+            { href: "http://www.blockchaintechnologies.com/blockchain-mining" },
+            "Read more about the math here."
+          )
+        );
+      } else if (detail.id) {
+        //node
+        contentType = "Node";
+        data = _react2.default.createElement(
+          "ul",
+          {
+            className: "raw-data" },
+          _react2.default.createElement(
+            "li",
+            {
+              key: 1 },
+            "Address: ",
+            "" + detail.id
+          ),
+          _react2.default.createElement(
+            "li",
+            {
+              key: 2 },
+            "Coins: ",
+            "" + detail.balance
+          )
+        );
+        description = _react2.default.createElement(
+          "content",
+          {
+            className: "description" },
+          "Nodes are the the discrete computing units of a blockchain cluster. In cryptocurrency terms they can be thought of addresses/accounts that can transact and send data/currency amongst themselves. Nodes are classified either as miners or as read-only participants.",
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "a",
+            { href: "https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/" },
+            "Learn more about their differences here."
+          )
+        );
+        txnForm = _react2.default.createElement(
+          "form",
+          { onSubmit: function onSubmit(e) {
+              return _this2.handleSubmitTxn(e);
+            } },
+          _react2.default.createElement(
+            "label",
+            null,
+            "Payment Amount:",
+            _react2.default.createElement("input", {
+              type: "text",
+              onChange: function onChange(e) {
+                return _this2.handleUpdate(e);
+              },
+              value: this.state.amount }),
+            _react2.default.createElement("input", {
+              className: "payment-submit",
+              type: "submit",
+              value: "Pay selected node" })
+          )
+        );
+      } else {
+        contentType = "User Node";
+        data = _react2.default.createElement(
+          "ul",
+          {
+            className: "raw-data" },
+          _react2.default.createElement(
+            "li",
+            {
+              key: 1 },
+            "Address: ",
+            "" + userNode.id
+          ),
+          _react2.default.createElement(
+            "li",
+            {
+              key: 2 },
+            "Coins: ",
+            "" + userNode.balance
+          )
+        );
+        description = _react2.default.createElement(
+          "content",
+          {
+            className: "description" },
+          "The above diagram shows a basic illustration of the blockchain technology that is used by cryptocurrencies such as Bitcoin and Ethereum. It includes:",
+          _react2.default.createElement(
+            "ul",
+            null,
+            _react2.default.createElement(
+              "li",
+              null,
+              "Nodes: represented by the circles/stars to the right are the computing nodes which can send transactions within the cryptocurrency economy."
+            ),
+            _react2.default.createElement(
+              "li",
+              null,
+              "Blockchain: The chain itself can be thought of as a record of ",
+              _react2.default.createElement(
+                "span",
+                null,
+                "validated"
+              ),
+              " transactions that has occurred since the original block, known as the genesis block."
+            )
+          )
+        );
+      }
+
+      return _react2.default.createElement(
+        "section",
+        {
+          className: "detail-inner" },
+        _react2.default.createElement(
+          "div",
+          {
+            className: "data-container" },
+          _react2.default.createElement(
+            "h3",
+            null,
+            "" + (contentType ? contentType + " Data" : "")
+          ),
+          data,
+          txnForm
+        ),
+        description
+      );
+    }
+  }]);
+
+  return Detail;
+}(_react2.default.Component);
 
 exports.default = Detail;
 
@@ -13486,7 +13567,7 @@ var _root = __webpack_require__(130);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13511,7 +13592,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 var _merge = __webpack_require__(39);
 
@@ -13541,8 +13622,8 @@ var BlocksReducer = function BlocksReducer() {
         return Object.assign({}, block);
       });
       var block = {
-        txns: action.txns,
-        hash: makeHash(),
+        txns: action.block.txns,
+        hash: action.block.hash,
         prevHash: newState[newState.length - 1].hash
       };
       newState.push(block);
@@ -13565,7 +13646,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 var _node_actions = __webpack_require__(21);
 
@@ -13603,7 +13684,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _node_actions = __webpack_require__(21);
 
-var _chain_actions = __webpack_require__(20);
+var _chain_actions = __webpack_require__(15);
 
 var _merge = __webpack_require__(39);
 
@@ -13650,16 +13731,15 @@ var NodesReducer = function NodesReducer() {
       newState = state.map(function (node) {
         return Object.assign({}, node);
       });
-      action.txns.forEach(function (txn) {
+      action.block.txns.forEach(function (txn) {
         if (txn.to !== txn.from) {
-          var to = newState.filter(function (node) {
-            return node.id === to;
-          })[0];
-          var from = newState.filter(function (node) {
-            return node.id === from;
-          })[0];
-          to += txn.amount;
-          from -= txn.amount;
+          for (var i = 0; i < newState.length; i++) {
+            if (newState[i].id === txn.to) {
+              newState[i].balance += txn.amount;
+            } else if (newState[i].id === txn.from) {
+              newState[i].balance -= txn.amount;
+            }
+          }
         }
       });
       return newState;
@@ -13747,6 +13827,7 @@ var TransactionsReducer = function TransactionsReducer() {
         return Object.assign({}, txn);
       });
       newState.push(action.txn);
+      console.log(newState);
       return newState;
     case _transactions_actions.CLEAR_TRANSACTIONS:
       return [];
@@ -13770,6 +13851,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _node_actions = __webpack_require__(21);
 
+var _chain_actions = __webpack_require__(15);
+
 var _merge = __webpack_require__(39);
 
 var _merge2 = _interopRequireDefault(_merge);
@@ -13784,6 +13867,10 @@ var UserNodeReducer = function UserNodeReducer() {
   switch (action.type) {
     case _node_actions.RECEIVE_USER_NODE:
       return action.node;
+    case _chain_actions.MINE_BLOCK:
+      newState = (0, _merge2.default)({}, state);
+      newState.balance += 25;
+      newState.minedBlocks.push(action.block.hash);
     default:
       return state;
   }
@@ -33126,7 +33213,7 @@ module.exports = assignValue;
 /* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(15);
+var isObject = __webpack_require__(16);
 
 /** Built-in value references. */
 var objectCreate = Object.create;
@@ -33210,7 +33297,7 @@ module.exports = baseIsArguments;
 
 var isFunction = __webpack_require__(55),
     isMasked = __webpack_require__(209),
-    isObject = __webpack_require__(15),
+    isObject = __webpack_require__(16),
     toSource = __webpack_require__(232);
 
 /**
@@ -33327,7 +33414,7 @@ module.exports = baseIsTypedArray;
 /* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(15),
+var isObject = __webpack_require__(16),
     isPrototype = __webpack_require__(89),
     nativeKeysIn = __webpack_require__(220);
 
@@ -33370,7 +33457,7 @@ var Stack = __webpack_require__(174),
     assignMergeValue = __webpack_require__(84),
     baseFor = __webpack_require__(180),
     baseMergeDeep = __webpack_require__(186),
-    isObject = __webpack_require__(15),
+    isObject = __webpack_require__(16),
     keysIn = __webpack_require__(96);
 
 /**
@@ -33423,7 +33510,7 @@ var assignMergeValue = __webpack_require__(84),
     isArrayLikeObject = __webpack_require__(234),
     isBuffer = __webpack_require__(93),
     isFunction = __webpack_require__(55),
-    isObject = __webpack_require__(15),
+    isObject = __webpack_require__(16),
     isPlainObject = __webpack_require__(235),
     isTypedArray = __webpack_require__(95),
     toPlainObject = __webpack_require__(237);
@@ -34089,7 +34176,7 @@ module.exports = initCloneObject;
 var eq = __webpack_require__(38),
     isArrayLike = __webpack_require__(54),
     isIndex = __webpack_require__(88),
-    isObject = __webpack_require__(15);
+    isObject = __webpack_require__(16);
 
 /**
  * Checks if the given arguments are from an iteratee call.
@@ -36502,7 +36589,7 @@ module.exports = EnterLeaveEventPlugin;
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 
 var getTextContentAccessor = __webpack_require__(115);
 
@@ -37015,7 +37102,7 @@ module.exports = ReactComponentBrowserEnvironment;
 var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactComponentEnvironment = __webpack_require__(61);
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactErrorUtils = __webpack_require__(62);
@@ -39645,7 +39732,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 var _assign = __webpack_require__(4);
 
-var React = __webpack_require__(17);
+var React = __webpack_require__(18);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMSelect = __webpack_require__(102);
 
@@ -41183,7 +41270,7 @@ var _assign = __webpack_require__(4);
 
 var EventListener = __webpack_require__(78);
 var ExecutionEnvironment = __webpack_require__(6);
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactUpdates = __webpack_require__(11);
 
@@ -41649,7 +41736,7 @@ module.exports = ReactPropTypeLocationNames;
 var _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(99);
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 var ReactBrowserEventEmitter = __webpack_require__(41);
 var ReactInputSelection = __webpack_require__(106);
 var ReactInstrumentation = __webpack_require__(9);
@@ -41926,7 +42013,7 @@ module.exports = ReactRef;
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(16);
+var PooledClass = __webpack_require__(17);
 var Transaction = __webpack_require__(43);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactServerUpdateQueue = __webpack_require__(284);
@@ -44847,7 +44934,7 @@ module.exports = KeyEscapeUtils;
 
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
 var invariant = __webpack_require__(1);
 
@@ -44965,7 +45052,7 @@ module.exports = PooledClass;
 
 
 var PooledClass = __webpack_require__(321);
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 
 var emptyFunction = __webpack_require__(10);
 var traverseAllChildren = __webpack_require__(330);
@@ -45160,11 +45247,11 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(19),
+var _prodInvariant = __webpack_require__(20),
     _assign = __webpack_require__(4);
 
 var ReactComponent = __webpack_require__(72);
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 var ReactPropTypeLocationNames = __webpack_require__(74);
 var ReactNoopUpdateQueue = __webpack_require__(73);
 
@@ -45883,7 +45970,7 @@ module.exports = ReactClass;
 
 
 
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 
 /**
  * Create a factory that creates HTML tag elements.
@@ -46059,7 +46146,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 var ReactPropTypeLocationNames = __webpack_require__(74);
 var ReactPropTypesSecret = __webpack_require__(126);
 
@@ -46565,7 +46652,7 @@ module.exports = '15.4.2';
 
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
 var ReactPropTypeLocationNames = __webpack_require__(74);
 var ReactPropTypesSecret = __webpack_require__(126);
@@ -46657,9 +46744,9 @@ module.exports = checkReactTypeSpec;
  */
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
-var ReactElement = __webpack_require__(18);
+var ReactElement = __webpack_require__(19);
 
 var invariant = __webpack_require__(1);
 
@@ -46702,7 +46789,7 @@ module.exports = onlyChild;
 
 
 
-var _prodInvariant = __webpack_require__(19);
+var _prodInvariant = __webpack_require__(20);
 
 var ReactCurrentOwner = __webpack_require__(12);
 var REACT_ELEMENT_TYPE = __webpack_require__(124);
