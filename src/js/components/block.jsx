@@ -8,6 +8,8 @@ class Block extends React.Component{
     this.state = {
       fill: "#427AA1"
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(block){

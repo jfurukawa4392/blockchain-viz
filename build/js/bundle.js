@@ -12737,6 +12737,8 @@ var Block = function (_React$Component) {
     _this.state = {
       fill: "#427AA1"
     };
+
+    _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
@@ -13132,7 +13134,7 @@ var ControlPanel = function (_React$Component) {
 }(_react2.default.Component);
 
 var makeHash = function makeHash() {
-  return Math.random().toString(36).slice(12);
+  return Math.random().toString(36).slice(2);
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -13887,7 +13889,7 @@ var _merge2 = _interopRequireDefault(_merge);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var makeHash = function makeHash() {
-  return Math.random().toString(36).slice(12);
+  return Math.random().toString(36).slice(2);
 };
 
 var _genesisBlock = {
@@ -13983,7 +13985,7 @@ var randCoord = function randCoord(maximum, minimum) {
 };
 
 var makeHash = function makeHash() {
-  return Math.random().toString(36).slice(12);
+  return Math.random().toString(36).slice(2);
 };
 
 var _nodes = [{ id: makeHash(), x: 425, y: 95, miner: false, balance: 50 }, { id: makeHash(), x: 460, y: 125, miner: false, balance: 50 }, { id: makeHash(), x: 480, y: 175, miner: false, balance: 50 }, { id: makeHash(), x: 460, y: 225, miner: false, balance: 50 }, { id: makeHash(), x: 425, y: 250, miner: false, balance: 50 }, { id: makeHash(), x: 350, y: 100, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 150, miner: false, balance: 50 }, { id: makeHash(), x: 300, y: 200, miner: false, balance: 50 }, { id: makeHash(), x: 350, y: 250, miner: false, balance: 50 }, { id: makeHash(), x: 150, y: 125, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 175, miner: true, minedBlocks: [], balance: 50 }, { id: makeHash(), x: 150, y: 225, miner: true, minedBlocks: [], balance: 50 }];

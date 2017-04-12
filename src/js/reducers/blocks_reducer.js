@@ -4,7 +4,7 @@ import{
 import merge from 'lodash/merge';
 
 const makeHash = () => (
-  Math.random().toString(36).slice(12)
+  Math.random().toString(36).slice(2)
 );
 
 const _genesisBlock = {
