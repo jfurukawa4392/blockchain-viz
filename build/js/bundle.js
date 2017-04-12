@@ -13570,6 +13570,8 @@ var Node = function (_React$Component) {
     _this.state = {
       fill: '#679436'
     };
+
+    _this.handleNodeClick = _this.handleNodeClick.bind(_this);
     return _this;
   }
 
@@ -13858,6 +13860,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   var store = (0, _store2.default)();
+
+  window.store = store;
+  window.state = store.getState;
 
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });

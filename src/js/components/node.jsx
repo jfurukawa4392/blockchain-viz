@@ -8,6 +8,8 @@ class Node extends React.Component{
     this.state = {
       fill: '#679436'
     };
+
+    this.handleNodeClick = this.handleNodeClick.bind(this);
   }
 
   handleNodeClick(node){
