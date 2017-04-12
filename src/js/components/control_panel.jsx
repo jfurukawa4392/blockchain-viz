@@ -91,7 +91,7 @@ class ControlPanel extends React.Component{
 }
 
 const makeHash = () => (
-  Math.random().toString(36).slice(12)
+  Math.random().toString(36).slice(2)
 );
 
 const mapStateToProps = state => {
