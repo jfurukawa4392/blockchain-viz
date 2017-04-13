@@ -12915,7 +12915,7 @@ var Blockchain = function (_React$Component) {
       var _props = this.props,
           blocks = _props.blocks,
           detailHash = _props.detailHash;
-      var x = 75,
+      var x = 125,
           y = -75;
 
 

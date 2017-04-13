@@ -38,7 +38,7 @@ class Blockchain extends React.Component {
     let chain = [];
     let blockShape;
     let { blocks, detailHash } = this.props;
-    let [ x, y ] = [ 75, -75 ];
+    let [ x, y ] = [ 125, -75 ];
 
     chain = blocks.map((block, idx) => {
         y += 100;
