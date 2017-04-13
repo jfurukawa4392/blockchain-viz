@@ -27,17 +27,19 @@ class Nodes extends React.Component{
   }
 
   render(){
-    let { nodes, userNode } = this.props;
+    let { nodes, userNode, detailId } = this.props;
     let backLines, nodeShapes, nodeShape, layer;
     if(userNode && nodes){
 
       nodeShapes = nodes.map((node, idx) => {
+
         return (
           <Node
             key={idx}
             idx={idx}
             node={node}
             userNode={userNode}
+            detailId={detailId}
             receiveNode={this.props.receiveNode}
             idx={idx}/>
         );
@@ -92,7 +94,8 @@ class Nodes extends React.Component{
 const mapStateToProps = (state) => ({
   nodes: state.nodes,
   userNode: state.userNode,
-  unverifiedTxns: state.unverifiedTxns
+  unverifiedTxns: state.unverifiedTxns,
+  detailId: state.detail.id
 });
 
 const mapDispatchToProps = (dispatch) => ({

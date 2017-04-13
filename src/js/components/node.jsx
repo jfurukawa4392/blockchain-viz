@@ -30,12 +30,18 @@ class Node extends React.Component{
   }
 
   render(){
-    let { node, userNode, idx } = this.props;
+    let { node, userNode, idx, detailId } = this.props;
     let fill, nodeShape, stroke, text;
     let [ x, y ] = [ node.x, node.y ];
     fill = this.state.fill;
     stroke = '#679436';
     text = "";
+
+    // highlight selected node
+    if(node.id === detailId){
+      fill = "#A5BE00";
+      stroke = "#A5BE00";
+    }
 
     if(node.miner){
       if(node.id === userNode.id){

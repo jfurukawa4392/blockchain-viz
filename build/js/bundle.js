@@ -12771,10 +12771,11 @@ var Block = function (_React$Component) {
           x = _props.x,
           y = _props.y,
           block = _props.block,
-          groupRef = _props.groupRef;
+          groupRef = _props.groupRef,
+          detailHash = _props.detailHash;
 
       var text = 'Block ' + idx;
-
+      var fill = this.state.fill;
       var arrow = null;
       if (idx > 0) {
         arrow = _react2.default.createElement(_reactKonva.Arrow, {
@@ -12785,6 +12786,10 @@ var Block = function (_React$Component) {
           stroke: 'black' });
       } else {
         text = "Genesis";
+      }
+      // highlight selected block
+      if (detailHash === block.hash) {
+        fill = "#064789";
       }
 
       return _react2.default.createElement(
@@ -12803,7 +12808,7 @@ var Block = function (_React$Component) {
         _react2.default.createElement(_reactKonva.Rect, {
           x: x,
           y: y,
-          fill: this.state.fill,
+          fill: fill,
           width: 150,
           height: 75,
           cornerRadius: 10 }),
@@ -12907,7 +12912,9 @@ var Blockchain = function (_React$Component) {
       //get blocks from store and render them with arrows
       var chain = [];
       var blockShape = void 0;
-      var blocks = this.props.blocks;
+      var _props = this.props,
+          blocks = _props.blocks,
+          detailHash = _props.detailHash;
       var x = 75,
           y = -75;
 
@@ -12919,6 +12926,7 @@ var Blockchain = function (_React$Component) {
             groupRef: 'not-last',
             key: idx,
             idx: idx,
+            detailHash: detailHash,
             receiveBlock: _this2.props.receiveBlock,
             block: block,
             x: x,
@@ -12929,6 +12937,7 @@ var Blockchain = function (_React$Component) {
             ref: 'last',
             key: idx,
             idx: idx,
+            detailHash: detailHash,
             receiveBlock: _this2.props.receiveBlock,
             block: block,
             x: x,
@@ -12959,7 +12968,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     blocks: state.blocks,
     activeBlock: state.activeBlock,
-    unverifiedTxns: state.unverifiedTxns
+    unverifiedTxns: state.unverifiedTxns,
+    detailHash: state.detail.hash
   };
 };
 
@@ -13606,7 +13616,8 @@ var Node = function (_React$Component) {
       var _props = this.props,
           node = _props.node,
           userNode = _props.userNode,
-          idx = _props.idx;
+          idx = _props.idx,
+          detailId = _props.detailId;
 
       var fill = void 0,
           nodeShape = void 0,
@@ -13619,6 +13630,12 @@ var Node = function (_React$Component) {
       fill = this.state.fill;
       stroke = '#679436';
       text = "";
+
+      // highlight selected node
+      if (node.id === detailId) {
+        fill = "#A5BE00";
+        stroke = "#A5BE00";
+      }
 
       if (node.miner) {
         if (node.id === userNode.id) {
@@ -13753,7 +13770,8 @@ var Nodes = function (_React$Component) {
 
       var _props = this.props,
           nodes = _props.nodes,
-          userNode = _props.userNode;
+          userNode = _props.userNode,
+          detailId = _props.detailId;
 
       var backLines = void 0,
           nodeShapes = void 0,
@@ -13762,11 +13780,13 @@ var Nodes = function (_React$Component) {
       if (userNode && nodes) {
 
         nodeShapes = nodes.map(function (node, idx) {
+
           return _react2.default.createElement(_node2.default, _defineProperty({
             key: idx,
             idx: idx,
             node: node,
             userNode: userNode,
+            detailId: detailId,
             receiveNode: _this2.props.receiveNode
           }, 'idx', idx));
         });
@@ -13815,7 +13835,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     nodes: state.nodes,
     userNode: state.userNode,
-    unverifiedTxns: state.unverifiedTxns
+    unverifiedTxns: state.unverifiedTxns,
+    detailId: state.detail.id
   };
 };
 
@@ -13862,7 +13883,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   var store = (0, _store2.default)();
-
+  window.state = store.getState;
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
 

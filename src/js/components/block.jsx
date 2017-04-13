@@ -29,9 +29,9 @@ class Block extends React.Component{
   }
 
   render(){
-    let { idx, x, y, block, groupRef } = this.props;
+    let { idx, x, y, block, groupRef, detailHash } = this.props;
     let text = `Block ${idx}`;
-
+    let fill = this.state.fill;
     let arrow = null;
     if(idx > 0){
       arrow = (
@@ -45,6 +45,10 @@ class Block extends React.Component{
     } else {
       text = "Genesis";
     }
+    // highlight selected block
+    if(detailHash === block.hash){
+      fill = "#064789";
+    }
 
     return(
       <Group
@@ -55,7 +59,7 @@ class Block extends React.Component{
         <Rect
           x={x}
           y={y}
-          fill={this.state.fill}
+          fill={fill}
           width={150}
           height={75}
           cornerRadius={10}/>

@@ -37,7 +37,7 @@ class Blockchain extends React.Component {
     //get blocks from store and render them with arrows
     let chain = [];
     let blockShape;
-    let { blocks } = this.props;
+    let { blocks, detailHash } = this.props;
     let [ x, y ] = [ 75, -75 ];
 
     chain = blocks.map((block, idx) => {
@@ -48,6 +48,7 @@ class Blockchain extends React.Component {
               groupRef="not-last"
               key={idx}
               idx={idx}
+              detailHash={detailHash}
               receiveBlock={this.props.receiveBlock}
               block={block}
               x={x}
@@ -60,6 +61,7 @@ class Blockchain extends React.Component {
               ref="last"
               key={idx}
               idx={idx}
+              detailHash={detailHash}
               receiveBlock={this.props.receiveBlock}
               block={block}
               x={x}
@@ -86,7 +88,8 @@ class Blockchain extends React.Component {
 const mapStateToProps = state => ({
   blocks: state.blocks,
   activeBlock: state.activeBlock,
-  unverifiedTxns: state.unverifiedTxns
+  unverifiedTxns: state.unverifiedTxns,
+  detailHash: state.detail.hash
 });
 
 const mapDispatchToProps = dispatch => ({
