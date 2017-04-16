@@ -28,6 +28,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-hover": "^0.6.3",
+    "react-joyride": "^1.10.1",
     "react-konva": "^1.1.1",
     "react-modal": "^1.7.3",
     "react-redux": "^5.0.3",
