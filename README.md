@@ -14,8 +14,8 @@ Ultimately, this technology allows for a fast, secure distribution of pseudo-dat
 For the sake of this illustration, the user must be aware of the following facets of the blockchain technology:
 
 - Any participant node can emit a valid transaction to other nodes in hopes that it will be verified by being written into the next block in the chain
-- Miners are participants that have the ability to group transactions together and add a new block of transactions to the end of the chain and reap a set reward of cryptocurrency for their work
-- When a new block is written, that event is propagated to all other participants in the chain so everyone has the same set of verified facts
+- Miners are participants that have the ability to group transactions together, add a new block of transactions to the end of the chain, and reap a set reward of cryptocurrency for their work
+- When a new block is written, that event is propagated to all other participants in the network so everyone has the same set of verified facts
 
 ## Snippets
 <p>Below is a code snippet for the mining progress bar and transaction verification</p>
