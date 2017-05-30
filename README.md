@@ -1,5 +1,5 @@
 # blockchain-viz
-An interactive visualization of the distributed ledger technology known as Blockchain. It is written using the ReactJS library and Redux framework. It was inspired by a visualization for GraphQL, a facebook querying technology that was illustrated by someone here: http://sgwilym.github.io/relay-visual-learners/
+An interactive visualization of the distributed ledger technology known as Blockchain. It is written using the ReactJS library and Redux framework. It was inspired by a visualization for GraphQL, a facebook backend technology that was illustrated by someone here: http://sgwilym.github.io/relay-visual-learners/
 
 As a basic overview, you are a miner node in a cluster of nodes. Make payments to other nodes and mine blocks to reap cryptocurrency rewards.
 
